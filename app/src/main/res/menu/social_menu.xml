@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ic_twitter"
+        android:icon="@drawable/twitter"
+        android:title="Twitter"/>
+    <item
+        android:id="@+id/ic_facebook"
+        android:icon="@drawable/facebook"
+        android:title="Facebook"/>
+</menu>
