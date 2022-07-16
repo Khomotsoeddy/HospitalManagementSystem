@@ -5,31 +5,48 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import za.ac.tut.hospitalmanagementsystem.R
+import za.ac.tut.hospitalmanagementsystem.RecycleAdapter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AppointmentsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private val order = arrayOf("All","Past","Upcoming","Today")
+    private lateinit var recyclerView: RecyclerView
+    private var arrayList = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_appointments, container, false)
-    }
+        val view : View =  inflater.inflate(R.layout.fragment_appointments, container, false)
 
+        val actv = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
+        val arrayAdapter = ArrayAdapter(this.requireContext(), R.layout.drop_down, order)
+
+        actv.setAdapter(arrayAdapter)
+        actv.setOnItemClickListener { adapterView, _, i, _ ->
+            val gen = adapterView.getItemAtPosition(i).toString()
+            Toast.makeText(this.context, "You Appointed $gen", Toast.LENGTH_SHORT).show()
+        }
+
+        arrayList.add("Ajay")//Adding object in arraylist
+        arrayList.add("Vijay")
+        arrayList.add("Prakash")
+        arrayList.add("Rohan")
+        arrayList.add("Vijay")
+
+        recyclerView = view.findViewById(R.id.recyclerView)
+
+        recyclerView.layoutManager  = LinearLayoutManager(this.context)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = RecycleAdapter(arrayList)
+        return view
+    }
 }

@@ -18,12 +18,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_marginTop="0dp"
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="420dp"
-            app:srcCompat="@drawable/background"
-            android:contentDescription="@string/todo" />
+            android:layout_height="382dp"
+            android:layout_marginTop="0dp"
+            android:contentDescription="@string/todo"
+            app:srcCompat="@drawable/background" />
 
         <TextView
             android:layout_width="match_parent"
@@ -42,8 +42,6 @@
             android:textSize="20sp"
             android:gravity="center"/>
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -60,18 +58,22 @@
                     android:id="@+id/buttonLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/login" />
+                    android:layout_weight="0.5"
+                    android:text="@string/login"
+                    android:layout_margin="10dp"/>
 
                 <Button
                     android:id="@+id/buttonRegister"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
+                    android:layout_margin="10dp"
                     android:text="@string/register" />
 
             </LinearLayout>
+
             <LinearLayout
+                android:layout_margin="20sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -96,9 +98,8 @@
 
             </LinearLayout>
         </LinearLayout>
-
-
     </LinearLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
@@ -112,6 +113,5 @@
         app:itemTextColor="@color/white">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
