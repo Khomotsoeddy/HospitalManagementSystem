@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import za.ac.tut.hospitalmanagementsystem.patient.PatientRegisterActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun goToRegisterPage() {
-        val intent = Intent(this,PatientRegisterActivity::class.java)
+        val intent = Intent(this, PatientRegisterActivity::class.java)
         startActivity(intent)
     }
 

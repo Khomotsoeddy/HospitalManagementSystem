@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "717000704113",
+    "project_id": "hospital-management-syst-8a48c",
+    "storage_bucket": "hospital-management-syst-8a48c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717000704113:android:8c7e31548bc8a82dfc9bd0",
+        "android_client_info": {
+          "package_name": "za.ac.tut.hospitalmanagementsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717000704113-knj4bglbd3ghae2bhskee71kd6evaq7v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDvR-1o4jisBDEARIS_-4WAOkBUZjzea0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717000704113-knj4bglbd3ghae2bhskee71kd6evaq7v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

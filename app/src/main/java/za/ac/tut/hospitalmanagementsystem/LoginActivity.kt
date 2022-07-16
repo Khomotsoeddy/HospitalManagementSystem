@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import za.ac.tut.hospitalmanagementsystem.patient.PatientActivity
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToLoginPage() {
-        val intent = Intent(this,PatientActivity::class.java)
+        val intent = Intent(this, PatientActivity::class.java)
         startActivity(intent)
     }
 }
