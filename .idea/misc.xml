@@ -3,13 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_admin.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_patient.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_patient_register.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_appointment.xml" value="0.1" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_appointments.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_doctor.xml" value="0.2" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_doctors.xml" value="0.1859375" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_patients.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_setappointment.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/row.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/view.xml" value="0.25" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/viewer.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/menu/admin_menu.xml" value="0.2" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/menu/patient_menu.xml" value="0.2" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/menu/search.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/app/src/main/res/drawable/ic_phone.xml" value="0.1115" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/app/src/main/res/layout/activity_login.xml" value="0.1859375" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/app/src/main/res/layout/activity_main.xml" value="0.2" />

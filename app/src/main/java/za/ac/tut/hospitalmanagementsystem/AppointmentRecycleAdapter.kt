@@ -3,12 +3,13 @@ package za.ac.tut.hospitalmanagementsystem
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import za.ac.tut.hospitalmanagementsystem.appointment.Appointment
 import za.ac.tut.hospitalmanagementsystem.appointment.Appointments
 
-class AppointmentRecycleAdapter(private val appointments : ArrayList<Appointment>) : RecyclerView.Adapter<AppointmentRecycleAdapter.MyViewHolder>() {
+class AppointmentRecycleAdapter(private val appointments : ArrayList<Appointment>,private val images : ArrayList<Int>) : RecyclerView.Adapter<AppointmentRecycleAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.viewer,parent,false)
@@ -23,6 +24,7 @@ class AppointmentRecycleAdapter(private val appointments : ArrayList<Appointment
         holder.time.text = appointments.get(position).time
         holder.doctorName.text = appointments.get(position).doctorId
         holder.specialization.text = appointments.get(position).specialization
+        holder.image.setImageResource(images[0])
     }
 
     override fun getItemCount(): Int {
@@ -30,6 +32,7 @@ class AppointmentRecycleAdapter(private val appointments : ArrayList<Appointment
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val image = itemView.findViewById<ImageView>(R.id.image)!!
         val name = itemView.findViewById<TextView>(R.id.textViewAppointmentId)!!
         val description = itemView.findViewById<TextView>(R.id.textViewDescription)!!
         val submittedDate = itemView.findViewById<TextView>(R.id.textViewSubmitDate)!!

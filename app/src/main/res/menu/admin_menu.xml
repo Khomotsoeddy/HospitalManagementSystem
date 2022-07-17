@@ -6,11 +6,15 @@
         android:icon="@drawable/twitter"
         android:title="Doctors"/>
     <item
+        android:id="@+id/ic_patient"
+        android:icon="@drawable/facebook"
+        android:title="Patients"/>
+    <item
         android:id="@+id/ic_appointments"
         android:icon="@drawable/facebook"
         android:title="Appointments"/>
     <item
-        android:id="@+id/ic_setAppointment"
+        android:id="@+id/ic_additional"
         android:icon="@drawable/facebook"
-        android:title="Set Appointment"/>
+        android:title="Extra Menu"/>
 </menu>

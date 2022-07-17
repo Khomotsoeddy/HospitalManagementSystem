@@ -1,44 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cart_view"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="#037180"
+    app:cardCornerRadius="25dp"
+    app:cardElevation="3dp"
+    app:contentPadding="4dp">
 
-
-    <TextView
-        android:id="@+id/textView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Course Code" />
+        android:id="@+id/relativeLayout"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Course Name" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Number of years" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/image"
+            android:layout_marginStart="10dp">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Total fees" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Department" />
+            <TextView
+                android:id="@+id/textViewDoctor"
+                android:layout_width="250dp"
+                android:layout_height="30dp"
+                android:textSize="20sp"
+                android:text="Doctor"
+                android:textAlignment="center" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:layout_margin="8dp"
-        android:background="#673642"/>
-</LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:text="Email                       : " />
+
+                <TextView
+                    android:id="@+id/textViewEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:text="@string/cell_phone" />
+
+                <TextView
+                    android:id="@+id/textViewPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:text="@string/specialization" />
+
+                <TextView
+                    android:id="@+id/textViewSpecialization"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

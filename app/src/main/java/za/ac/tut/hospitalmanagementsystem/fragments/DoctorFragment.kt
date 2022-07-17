@@ -18,6 +18,7 @@ class DoctorFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
+        arrayList.clear()
         arrayList.add("Ajay")//Adding object in arraylist
         arrayList.add("Vijay")
         arrayList.add("Prakash")

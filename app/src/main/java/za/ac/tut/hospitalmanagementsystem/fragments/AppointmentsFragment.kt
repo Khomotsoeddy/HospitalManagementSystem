@@ -14,36 +14,56 @@ import za.ac.tut.hospitalmanagementsystem.R
 import android.widget.Toast
 import com.google.firebase.database.*
 import za.ac.tut.hospitalmanagementsystem.appointment.Appointment
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AppointmentsFragment : Fragment() {
 
     private lateinit var database : DatabaseReference
-    private val order = arrayOf("All","Past","Upcoming","Today")
     private lateinit var recyclerView: RecyclerView
     private var appData :ArrayList<Appointment> = ArrayList()
+    private var images :ArrayList<Int> = ArrayList()
+    private val order= arrayOf("All","Past","Upcoming","Today")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         val view : View =  inflater.inflate(R.layout.fragment_appointments, container, false)
 
-        val actv = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
-        val arrayAdapter = ArrayAdapter(this.requireContext(), R.layout.drop_down, order)
-
-        actv.setAdapter(arrayAdapter)
-        actv.setOnItemClickListener { adapterView, _, i, _ ->
-            val gen = adapterView.getItemAtPosition(i).toString()
-            Toast.makeText(this.context, "You Appointed $gen", Toast.LENGTH_SHORT).show()
-
-        }
-
         getAppointmentsList(view)
+
+        doDropDown(view)
 
         return view
     }
 
-    private fun getAppointmentsList(view: View) {
+    private fun doDropDown(view: View) {
 
+        val actv = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
+        val arrayAdapter = ArrayAdapter(this.requireContext().applicationContext, R.layout.drop_down, order)
+
+        actv.setAdapter(arrayAdapter)
+        actv.setOnItemClickListener { adapterView, _, i, _ ->
+            val sort = adapterView.getItemAtPosition(i).toString()
+            //Toast.makeText(this.context, "You Appointed $gen", Toast.LENGTH_SHORT).show()
+            //Println()
+            System.out.println(appData.size)
+
+            recyclerView = view.findViewById(R.id.recyclerViewView)
+            recyclerView.layoutManager  = LinearLayoutManager(this.context)
+            recyclerView.setHasFixedSize(true)
+
+            images.add(R.drawable.ic_patient_appointment)
+
+            recyclerView.adapter = AppointmentRecycleAdapter(appData,images)
+        }
+    }
+
+    private fun getAppointmentsList(view: View) {
+        appData.clear()
         database = FirebaseDatabase.getInstance().getReference("Appointment")
         database.get().addOnSuccessListener {
             for(i in it.children){
@@ -65,11 +85,5 @@ class AppointmentsFragment : Fragment() {
             Toast.makeText(this.context,"failed", Toast.LENGTH_LONG).show()
         }
 
-        recyclerView = view.findViewById(R.id.recyclerViewView)
-        recyclerView.layoutManager  = LinearLayoutManager(this.context)
-        recyclerView.setHasFixedSize(true)
-
-        //appointmentList = arrayListOf<Appointments>()
-        recyclerView.adapter = AppointmentRecycleAdapter(appData)
     }
 }

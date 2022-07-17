@@ -17,17 +17,17 @@ class RecycleAdapter(private val about : ArrayList<String>) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.name.text = about[position]
+        holder.doctorName.text = about[position]
     }
 
     override fun getItemCount(): Int {
         return about.size
     }
     class MyViewHolder(itemView: View) : ViewHolder(itemView) {
-        val name = itemView.findViewById<TextView>(R.id.textView)
-        val name1 = itemView.findViewById<TextView>(R.id.textView2)
-        val name2 = itemView.findViewById<TextView>(R.id.textView3)
-        val name3 = itemView.findViewById<TextView>(R.id.textView4)
-        val name4 = itemView.findViewById<TextView>(R.id.textView5)
+        val doctorName = itemView.findViewById<TextView>(R.id.textViewDoctor)
+        val doctorEmail = itemView.findViewById<TextView>(R.id.textViewEmail)
+        val doctorPhone = itemView.findViewById<TextView>(R.id.textViewPhone)
+        val specialization = itemView.findViewById<TextView>(R.id.textViewSpecialization)
+        //val name4 = itemView.findViewById<TextView>(R.id.textView5)
     }
 }

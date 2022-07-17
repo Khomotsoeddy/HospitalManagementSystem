@@ -26,9 +26,9 @@
                 android:id="@+id/auto_complete_text"
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
-                android:text="All"
-                android:inputType="none"/>
+                android:inputType="text"/>
         </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
         <LinearLayout

@@ -7,7 +7,7 @@
     android:id="@+id/cart_view"
     android:layout_margin="5dp"
     app:cardBackgroundColor="#037180"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="25dp"
     app:cardElevation="3dp"
     app:contentPadding="4dp">
 

@@ -8,4 +8,21 @@
     <string name="register_">Register</string>
     <string name="don_t_you_have_an_account">Don\'t you have an account?</string>
     <string name="username">Username</string>
+    <string name="cell_phone">Cell Phone :</string>
+    <string name="specialization">Specialization :</string>
+
+    <string-array name="sort">
+        <item>All</item>
+        <item>Past</item>
+        <item>Upcoming</item>
+        <item>Today</item>
+    </string-array>
+    <string-array name="order">
+        <item>All</item>
+        <item>Past</item>
+        <item>Upcoming</item>
+        <item>Today</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

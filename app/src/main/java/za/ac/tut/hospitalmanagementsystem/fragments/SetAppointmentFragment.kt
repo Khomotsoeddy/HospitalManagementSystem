@@ -53,10 +53,10 @@ class SetAppointmentFragment : Fragment() {
 
         val description = requireView().findViewById<TextInputEditText>(R.id.textInputEditTextDescription)
         val id =  "1234567654321"
-        val randomValues = Random.nextInt(1000)
+        val randomValues = Random.nextInt(100000)
 
         val date = Date()
-        val dFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+        val dFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val currentDate = dFormat.format(date).toString()
 
 
@@ -74,7 +74,7 @@ class SetAppointmentFragment : Fragment() {
             "Pending"
         ))
 
-        Toast.makeText(this.context,"failed", Toast.LENGTH_LONG).show()
+        Toast.makeText(this.context,"Details sent", Toast.LENGTH_LONG).show()
 
     }
 
@@ -88,7 +88,7 @@ class SetAppointmentFragment : Fragment() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         val dpd = DatePickerDialog(this.requireContext(), { _, mYear, mMonth, mDay ->
-            date.setText("$mDay-$mMonth-$mYear")
+            date.setText("$mDay/$mMonth/$mYear")
             pickedDate = date.text.toString()
         },year,month,day)
 
