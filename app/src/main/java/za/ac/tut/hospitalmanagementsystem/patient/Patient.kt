@@ -7,8 +7,8 @@ class Patient(
     var age: Int,
     var gender: String,
     var phone: String,
-    var address: String,
-    var username: String
+    var email: String,
+    var address: String
 ) {
 
 

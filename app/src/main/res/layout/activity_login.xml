@@ -33,12 +33,12 @@
         app:hintTextAppearance="@color/design_default_color_primary">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputEditTextEmail"
+            android:id="@+id/textInputEditTextId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_profile"
-            android:hint="@string/username"
-            android:inputType="textEmailAddress"
+            android:drawableStart="@drawable/ic_number"
+            android:hint="ID Number"
+            android:inputType="number"
             android:minHeight="48dp"
             android:drawablePadding="10dp"
             android:textColor="#000"

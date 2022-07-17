@@ -30,7 +30,7 @@ class PatientRegisterActivity : AppCompatActivity() {
         actv.setAdapter(arrayAdapter)
         actv.setOnItemClickListener { adapterView, _, i, _ ->
             gen = adapterView.getItemAtPosition(i).toString()
-            Toast.makeText(this, "You Appointed $gen", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "You Appointed $gen", Toast.LENGTH_SHORT).show()
         }
         buttonSubmit.setOnClickListener {
             addToDatabase()
@@ -50,21 +50,21 @@ class PatientRegisterActivity : AppCompatActivity() {
         val role = "patient"
 
         val database  = Firebase.database
-        val myref = database.getReference("Patients").child(email.text.toString())
+        val myref = database.getReference("Patients").child(idNo.text.toString())
 
         myref.setValue(
             Patients(
             firstName.text.toString(),
             lastName.text.toString(),
-            idNo.text.toString(),
             age.text.toString(),
             gen ,
+            email.text.toString(),
             phone.text.toString() ,
             address.text.toString(),
             password.text.toString(),
             role)
         )
-
+        Toast.makeText(this,"Successfully registered", Toast.LENGTH_LONG).show()
         goToLoginPage()
     }
 

@@ -131,8 +131,6 @@
             style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
             app:hintTextAppearance="@color/design_default_color_primary"
             app:helperText="required"
-            app:counterMaxLength="10"
-            app:counterEnabled="true"
             app:errorTextColor="@color/design_default_color_error">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -191,7 +189,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/usernameContainer"
+            android:id="@+id/emailContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:boxStrokeColor="#000"
@@ -205,8 +203,8 @@
                 android:id="@+id/textInputEditTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_profile"
-                android:hint="Username"
+                android:drawableStart="@drawable/ic_email"
+                android:hint="Email"
                 android:inputType="text"
                 android:minHeight="48dp"
                 android:drawablePadding="10dp"

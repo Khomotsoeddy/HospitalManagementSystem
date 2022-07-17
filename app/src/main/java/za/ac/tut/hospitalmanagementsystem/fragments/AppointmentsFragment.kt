@@ -7,23 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import za.ac.tut.hospitalmanagementsystem.AppointmentRecycleAdapter
 import za.ac.tut.hospitalmanagementsystem.R
-import za.ac.tut.hospitalmanagementsystem.RecycleAdapter
+import android.widget.Toast
+import com.google.firebase.database.*
+import za.ac.tut.hospitalmanagementsystem.appointment.Appointment
+
 
 class AppointmentsFragment : Fragment() {
 
+    private lateinit var database : DatabaseReference
     private val order = arrayOf("All","Past","Upcoming","Today")
     private lateinit var recyclerView: RecyclerView
-    private var arrayList = ArrayList<String>()
+    private var appData :ArrayList<Appointment> = ArrayList()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         val view : View =  inflater.inflate(R.layout.fragment_appointments, container, false)
 
@@ -34,19 +34,42 @@ class AppointmentsFragment : Fragment() {
         actv.setOnItemClickListener { adapterView, _, i, _ ->
             val gen = adapterView.getItemAtPosition(i).toString()
             Toast.makeText(this.context, "You Appointed $gen", Toast.LENGTH_SHORT).show()
+
         }
 
-        arrayList.add("Ajay")//Adding object in arraylist
-        arrayList.add("Vijay")
-        arrayList.add("Prakash")
-        arrayList.add("Rohan")
-        arrayList.add("Vijay")
+        getAppointmentsList(view)
 
-        recyclerView = view.findViewById(R.id.recyclerView)
+        return view
+    }
 
+    private fun getAppointmentsList(view: View) {
+
+        database = FirebaseDatabase.getInstance().getReference("Appointment")
+        database.get().addOnSuccessListener {
+            for(i in it.children){
+                val appointmentId = i.key.toString()
+                val doctor = i.child("doctor").value.toString()
+                val date = i.child("date").value.toString()
+                val patient = i.child("patient").value.toString()
+                val specialization = i.child("specialization").value.toString()
+                val status = i.child("status").value.toString()
+                val submitDate = i.child("submitDate").value.toString()
+                val time = i.child("time").value.toString()
+                val description = i.child("description").value.toString()
+
+                val appoint = Appointment(appointmentId,patient,doctor,specialization,description,time,submitDate,date,status)
+
+                appData.add(appoint)
+            }
+        }.addOnFailureListener {
+            Toast.makeText(this.context,"failed", Toast.LENGTH_LONG).show()
+        }
+
+        recyclerView = view.findViewById(R.id.recyclerViewView)
         recyclerView.layoutManager  = LinearLayoutManager(this.context)
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = RecycleAdapter(arrayList)
-        return view
+
+        //appointmentList = arrayListOf<Appointments>()
+        recyclerView.adapter = AppointmentRecycleAdapter(appData)
     }
 }
