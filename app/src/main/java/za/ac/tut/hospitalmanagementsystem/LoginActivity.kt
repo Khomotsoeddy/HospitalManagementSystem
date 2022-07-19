@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.RadioButton
 import za.ac.tut.hospitalmanagementsystem.admin.AdminActivity
+import za.ac.tut.hospitalmanagementsystem.patient.PatientActivity
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,13 +15,35 @@ class LoginActivity : AppCompatActivity() {
 
         val buttonLogin = findViewById<Button>(R.id.buttonLogin)
 
+        val radioPatient = findViewById<RadioButton>(R.id.radioPatient)
+        val radioAdmin = findViewById<RadioButton>(R.id.radioAdmin)
+        val radioDoctor = findViewById<RadioButton>(R.id.radioDoctor)
+
         buttonLogin.setOnClickListener {
-            goToLoginPage()
+
+            if(radioAdmin.isChecked){
+                goToAdminPage()
+            }else if(radioPatient.isChecked){
+                goToPatientPage()
+            }else if(radioDoctor.isChecked){
+                goToDoctorPage()
+            }
+
         }
     }
 
-    private fun goToLoginPage() {
+    private fun goToDoctorPage() {
+
+    }
+
+    private fun goToPatientPage() {
+        val intent = Intent(this, PatientActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun goToAdminPage() {
         val intent = Intent(this, AdminActivity::class.java)
         startActivity(intent)
     }
+
 }
