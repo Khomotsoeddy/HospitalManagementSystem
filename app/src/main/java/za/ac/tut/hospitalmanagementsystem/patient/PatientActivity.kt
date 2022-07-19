@@ -20,7 +20,7 @@ class PatientActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient)
 
-        MobileAds.initialize(this) {}
+        MobileAds.initialize(this.applicationContext) {}
         replaceFragment(doctorFragment)
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)

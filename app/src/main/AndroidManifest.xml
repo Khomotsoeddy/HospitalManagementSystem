@@ -14,10 +14,10 @@
         android:theme="@style/Theme.HospitalManagementSystem"
         tools:targetApi="31">
         <activity
-            android:name=".ExtraActivity"
+            android:name=".admin.AdminAppointmentEditActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminActivity"
+            android:name=".admin.AdminActivity"
             android:exported="false" />
 
         <meta-data

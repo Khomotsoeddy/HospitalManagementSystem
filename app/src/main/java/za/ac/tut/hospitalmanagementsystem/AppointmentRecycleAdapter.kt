@@ -11,9 +11,23 @@ import za.ac.tut.hospitalmanagementsystem.appointment.Appointments
 
 class AppointmentRecycleAdapter(private val appointments : ArrayList<Appointment>,private val images : ArrayList<Int>) : RecyclerView.Adapter<AppointmentRecycleAdapter.MyViewHolder>() {
 
+    private lateinit var mListener: onItemClickListener
+
+    interface onItemClickListener{
+
+        fun onItemClick(position : Int)
+
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+
+        mListener = listener
+
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.viewer,parent,false)
-        return MyViewHolder(itemView)
+        return MyViewHolder(itemView,mListener)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -31,7 +45,7 @@ class AppointmentRecycleAdapter(private val appointments : ArrayList<Appointment
         return appointments.size
     }
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class MyViewHolder(itemView: View,listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val image = itemView.findViewById<ImageView>(R.id.image)!!
         val name = itemView.findViewById<TextView>(R.id.textViewAppointmentId)!!
         val description = itemView.findViewById<TextView>(R.id.textViewDescription)!!
@@ -40,5 +54,12 @@ class AppointmentRecycleAdapter(private val appointments : ArrayList<Appointment
         val time = itemView.findViewById<TextView>(R.id.textViewTime)!!
         val doctorName = itemView.findViewById<TextView>(R.id.textViewDoctor)!!
         val specialization = itemView.findViewById<TextView>(R.id.textViewSpecialization)!!
+
+        init {
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+        }
+
     }
 }

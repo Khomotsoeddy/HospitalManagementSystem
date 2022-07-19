@@ -8,31 +8,31 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import za.ac.tut.hospitalmanagementsystem.R
 
 class AdminActivity : AppCompatActivity() {
-    private val AppointmentFragment = AppointmentFragment()
-    private val DoctorsFragment = DoctorsFragment()
-    private val PatientsFragment =PatientsFragment()
-    private val ExtraFragment = ExtraFragment()
+    private val AdminAppointmentsFragment = AdminAppointmentsFragment()
+    private val AdminDoctorsFragment = AdminDoctorsFragment()
+    private val AdminPatientsFragment =AdminPatientsFragment()
+    private val AdminExtraFragment = AdminExtraFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
 
-        MobileAds.initialize(this) {}
-        replaceFragment(AppointmentFragment)
+        MobileAds.initialize(this.applicationContext) {}
+        replaceFragmentAdmin(AdminDoctorsFragment)
 
-        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigationAdmin)
         bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.ic_doctor -> replaceFragment(AppointmentFragment)
-                R.id.ic_appointments -> replaceFragment(DoctorsFragment)
-                R.id.ic_patient -> replaceFragment(PatientsFragment)
-                R.id.ic_additional -> replaceFragment(ExtraFragment)
+                R.id.ic_admin_appointments -> replaceFragmentAdmin(AdminAppointmentsFragment)
+                R.id.ic_admin_doctor -> replaceFragmentAdmin(AdminDoctorsFragment)
+                R.id.ic_admin_patient -> replaceFragmentAdmin(AdminPatientsFragment)
+                R.id.ic_admin_additional -> replaceFragmentAdmin(AdminExtraFragment)
             }
             true
         }
     }
 
-    private fun replaceFragment(fragment: Fragment){
+    private fun replaceFragmentAdmin(fragment: Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frameLayout,fragment)
         transaction.commit()

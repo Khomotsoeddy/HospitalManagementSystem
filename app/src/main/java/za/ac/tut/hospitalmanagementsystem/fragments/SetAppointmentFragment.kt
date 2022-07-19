@@ -37,9 +37,19 @@ class SetAppointmentFragment : Fragment() {
             spec = adapterView.getItemAtPosition(i).toString()
         }
 
+        val myCalender = Calendar.getInstance()
+        val datePicker = DatePickerDialog.OnDateSetListener{ _, year, month, dayOfMonth ->
+            myCalender.set(Calendar.YEAR,year)
+            myCalender.set(Calendar.MONTH,month)
+            myCalender.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+            updateMyCalender(myCalender,view)
+        }
+
         //button
         pickDate.setOnClickListener {
-            dialog(view)
+            DatePickerDialog(this.requireContext(),datePicker,myCalender.get(Calendar.YEAR),myCalender.get(Calendar.MONTH),myCalender.get(
+                Calendar.DAY_OF_MONTH)).show()
+
         }
         val buttonSubmit = view.findViewById<Button>(R.id.buttonSubmit)
         buttonSubmit.setOnClickListener {
@@ -49,6 +59,14 @@ class SetAppointmentFragment : Fragment() {
         return view
     }
 
+    private fun updateMyCalender(myCalender: Calendar,view: View) {
+        val date = view.findViewById<TextInputEditText>(R.id.textInputEditTextDate)
+        val dFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+
+        date.setText(dFormat.format(myCalender.time))
+        pickedDate = dFormat.format(myCalender.time).toString()
+    }
+
     private fun submitAppointment() {
 
         val description = requireView().findViewById<TextInputEditText>(R.id.textInputEditTextDescription)
@@ -56,7 +74,7 @@ class SetAppointmentFragment : Fragment() {
         val randomValues = Random.nextInt(100000)
 
         val date = Date()
-        val dFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val dFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
         val currentDate = dFormat.format(date).toString()
 
 
@@ -77,22 +95,4 @@ class SetAppointmentFragment : Fragment() {
         Toast.makeText(this.context,"Details sent", Toast.LENGTH_LONG).show()
 
     }
-
-    private fun dialog(view: View) {
-        val date = view.findViewById<TextInputEditText>(R.id.textInputEditTextDate)
-
-        //calendar
-        val calendar = Calendar.getInstance()
-        val month = calendar.get(Calendar.MONTH)
-        val year = calendar.get(Calendar.YEAR)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val dpd = DatePickerDialog(this.requireContext(), { _, mYear, mMonth, mDay ->
-            date.setText("$mDay/$mMonth/$mYear")
-            pickedDate = date.text.toString()
-        },year,month,day)
-
-        dpd.show()
-    }
-
 }

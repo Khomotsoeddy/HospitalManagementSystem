@@ -11,25 +11,41 @@
         android:orientation="vertical">
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:hint="Arrange Your Appointment"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:gravity="center">
 
-            <AutoCompleteTextView
-                android:id="@+id/auto_complete_text"
-                android:layout_width="match_parent"
-                android:layout_height="57dp"
-                android:inputType="text"/>
-        </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/buttonAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All"
+                android:layout_margin="1dp"/>
+
+            <Button
+                android:id="@+id/buttonToday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Today"
+                android:layout_margin="1dp"/>
+
+            <Button
+                android:id="@+id/buttonComing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UPcoming"
+                android:layout_margin="1dp"/>
+
+            <Button
+                android:id="@+id/buttonPast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Past"
+                android:layout_margin="1dp"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
