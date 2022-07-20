@@ -1,6 +1,5 @@
 package za.ac.tut.hospitalmanagementsystem.admin
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -13,7 +12,7 @@ import za.ac.tut.hospitalmanagementsystem.R
 class AdminDoctorDetailsActivity : AppCompatActivity() {
 
     private lateinit var database : DatabaseReference
-    private val AdminDoctorsFragment = AdminDoctorsFragment()
+    private val adminDoctorsFragment = AdminDoctorsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +68,7 @@ class AdminDoctorDetailsActivity : AppCompatActivity() {
             Toast.makeText(this,"Doctor removed", Toast.LENGTH_LONG).show()
         }
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frameLayout,AdminDoctorsFragment)
+        transaction.replace(R.id.frameLayout,adminDoctorsFragment)
         transaction.commit()
     }
 }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.AdminActivity">
+    tools:context=".admin.AdminActivity"
+    android:background="#D4E1E3">
 
     <FrameLayout
         android:id="@+id/frameLayout"

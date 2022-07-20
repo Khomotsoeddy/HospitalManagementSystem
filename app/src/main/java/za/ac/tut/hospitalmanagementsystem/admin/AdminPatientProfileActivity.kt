@@ -13,7 +13,7 @@ import za.ac.tut.hospitalmanagementsystem.R
 class AdminPatientProfileActivity : AppCompatActivity() {
 
     private lateinit var database : DatabaseReference
-    private val AdminPatientsFragment =AdminPatientsFragment()
+    private val adminPatientsFragment =AdminPatientsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +59,7 @@ class AdminPatientProfileActivity : AppCompatActivity() {
             Toast.makeText(this,"Patient removed", Toast.LENGTH_LONG).show()
         }
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frameLayout,AdminPatientsFragment)
+        transaction.replace(R.id.frameLayout,adminPatientsFragment)
         transaction.commit()
     }
 }

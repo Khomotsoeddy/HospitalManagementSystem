@@ -122,6 +122,10 @@ class AdminAppointmentsFragment : Fragment() {
                 override fun onItemClick(position: Int) {
 
                     val intent = Intent(this@AdminAppointmentsFragment.requireContext(), AdminAppointmentEditActivity::class.java)
+                    intent.putExtra("appointmentId",appData.get(position).appointmentId)
+                    intent.putExtra("description",appData.get(position).description)
+                    intent.putExtra("date",appData.get(position).date)
+                    intent.putExtra("specialization",appData.get(position).specialization)
                     startActivity(intent)
                 }
 

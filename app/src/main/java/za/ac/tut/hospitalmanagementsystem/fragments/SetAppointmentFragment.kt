@@ -11,6 +11,8 @@ import za.ac.tut.hospitalmanagementsystem.R
 import java.util.*
 import android.widget.ArrayAdapter
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import za.ac.tut.hospitalmanagementsystem.appointment.Appointments
@@ -18,15 +20,19 @@ import java.text.SimpleDateFormat
 import kotlin.random.Random
 
 class SetAppointmentFragment : Fragment() {
-
+    private lateinit var database : DatabaseReference
     private val specialization = arrayOf("Dentist","Dermatologist","Gynaecologist","Optometrist")
     private lateinit var spec: String
     private lateinit var pickedDate : String
+    private lateinit var textViewEmail : TextView
+    private lateinit var textViewPhone : TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_setappointment, container, false)
 
+        textViewEmail = view.findViewById(R.id.textViewEmail)
+        textViewPhone = view.findViewById(R.id.textViewPhone)
         val pickDate  = view.findViewById<Button>(R.id.buttonPickDate)
 
         val actv = view.findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
@@ -56,7 +62,23 @@ class SetAppointmentFragment : Fragment() {
             submitAppointment()
         }
 
+        adminDetails()
         return view
+    }
+
+    private fun adminDetails() {
+        var email = ""
+        var phone = ""
+        database = FirebaseDatabase.getInstance().getReference("Admins")
+        database.get().addOnSuccessListener {
+            for (i in it.children) {
+                
+                email = i.child("email").value.toString()
+                phone = i.child("phone").value.toString()
+            }
+            textViewPhone.text = phone
+            textViewEmail.text = email
+        }
     }
 
     private fun updateMyCalender(myCalender: Calendar,view: View) {
