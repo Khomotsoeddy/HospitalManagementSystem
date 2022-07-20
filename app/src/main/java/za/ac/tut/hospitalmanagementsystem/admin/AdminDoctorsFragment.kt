@@ -93,6 +93,17 @@ class AdminDoctorsFragment : Fragment() {
             myAdapter.setOnItemClickListener(object : RecycleAdapter.onItemClickListener{
                 override fun onItemClick(position: Int) {
                     val intent = Intent(this@AdminDoctorsFragment.requireContext(), AdminDoctorDetailsActivity::class.java)
+                    intent.putExtra("doctorId",docData.get(position).doctorId)
+                    intent.putExtra("firstName",docData.get(position).firstName)
+                    intent.putExtra("lastName",docData.get(position).lastName)
+                    intent.putExtra("idNo",docData.get(position).idNo)
+                    intent.putExtra("age",docData.get(position).age)
+                    intent.putExtra("gender",docData.get(position).gender)
+                    intent.putExtra("phone",docData.get(position).phone)
+                    intent.putExtra("email",docData.get(position).email)
+                    intent.putExtra("office",docData.get(position).office)
+                    intent.putExtra("address",docData.get(position).address)
+                    intent.putExtra("specialization",docData.get(position).specialization)
                     startActivity(intent)
                 }
             })

@@ -71,7 +71,15 @@ class AdminPatientsFragment : Fragment() {
 
             myAdapter.setOnItemClickListener(object : PatientAdapter.onItemClickListener{
                 override fun onItemClick(position: Int) {
-                    val intent = Intent(this@AdminPatientsFragment.requireContext(), AdminAppointmentEditActivity::class.java)
+                    val intent = Intent(this@AdminPatientsFragment.requireContext(), AdminPatientProfileActivity::class.java)
+                    intent.putExtra("firstName",patData.get(position).firstName)
+                    intent.putExtra("lastName",patData.get(position).lastName)
+                    intent.putExtra("idNo",patData.get(position).idNo)
+                    intent.putExtra("age",patData.get(position).age)
+                    intent.putExtra("gender",patData.get(position).gender)
+                    intent.putExtra("phone",patData.get(position).phone)
+                    intent.putExtra("email",patData.get(position).email)
+                    intent.putExtra("address",patData.get(position).address)
                     startActivity(intent)
                 }
 
