@@ -14,6 +14,15 @@
         android:theme="@style/Theme.HospitalManagementSystem"
         tools:targetApi="31">
         <activity
+            android:name=".admin.AdminDoctorDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AddDoctorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".admin.AdminPatientProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".admin.AdminAppointmentEditActivity"
             android:exported="false" />
         <activity

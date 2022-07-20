@@ -26,7 +26,7 @@ class AdminActivity : AppCompatActivity() {
                 R.id.ic_admin_appointments -> replaceFragmentAdmin(AdminAppointmentsFragment)
                 R.id.ic_admin_doctor -> replaceFragmentAdmin(AdminDoctorsFragment)
                 R.id.ic_admin_patient -> replaceFragmentAdmin(AdminPatientsFragment)
-                R.id.ic_admin_additional -> replaceFragmentAdmin(AdminExtraFragment)
+                //R.id.ic_admin_additional -> replaceFragmentAdmin(AdminExtraFragment)
             }
             true
         }

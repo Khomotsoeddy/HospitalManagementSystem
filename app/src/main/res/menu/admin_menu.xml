@@ -3,18 +3,14 @@
 
     <item
         android:id="@+id/ic_admin_doctor"
-        android:icon="@drawable/twitter"
         android:title="Doctors"/>
     <item
         android:id="@+id/ic_admin_patient"
-        android:icon="@drawable/facebook"
         android:title="Patients"/>
     <item
         android:id="@+id/ic_admin_appointments"
-        android:icon="@drawable/facebook"
         android:title="Appointments"/>
-    <item
+    <!--<item
         android:id="@+id/ic_admin_additional"
-        android:icon="@drawable/facebook"
-        android:title="Extra Menu"/>
+        android:title="Extra Menu"/>-->
 </menu>
