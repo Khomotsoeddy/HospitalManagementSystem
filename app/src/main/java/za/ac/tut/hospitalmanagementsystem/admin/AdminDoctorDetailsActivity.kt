@@ -1,5 +1,6 @@
 package za.ac.tut.hospitalmanagementsystem.admin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -67,8 +68,7 @@ class AdminDoctorDetailsActivity : AppCompatActivity() {
         database.removeValue().addOnSuccessListener {
             Toast.makeText(this,"Doctor removed", Toast.LENGTH_LONG).show()
         }
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frameLayout,adminDoctorsFragment)
-        transaction.commit()
+        val intent = Intent(this, AdminActivity::class.java)
+        startActivity(intent)
     }
 }

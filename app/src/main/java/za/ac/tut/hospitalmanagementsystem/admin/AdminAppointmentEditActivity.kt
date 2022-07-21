@@ -1,5 +1,6 @@
 package za.ac.tut.hospitalmanagementsystem.admin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
@@ -10,15 +11,46 @@ import za.ac.tut.hospitalmanagementsystem.doctor.Doctor
 
 class AdminAppointmentEditActivity : AppCompatActivity() {
 
-    private lateinit var employee: String
+    private var employee = ""
     private var docData = ArrayList<Doctor>()
     private var doctors :ArrayList<String> = ArrayList()
     private lateinit var database : DatabaseReference
-
+    private lateinit var pickedTime: String
+    private var min = 0
+    private var hour = 0
+    private var amOrPm = ""
+    private val adminAppointmentsFragment = AdminAppointmentsFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_appointment_edit)
+
+        val numberPickerHour = findViewById<NumberPicker>(R.id.numberPickerHour)
+        val numberPickerMinutes = findViewById<NumberPicker>(R.id.numberPickerMinutes)
+        val numberPickerAmPm = findViewById<NumberPicker>(R.id.numberPickerAmPm)
+
+        numberPickerHour.maxValue = 12
+        numberPickerHour.minValue = 1
+
+        numberPickerMinutes.minValue = 0
+        numberPickerMinutes.maxValue = 59
+
+        val str = arrayOf("Am","Pm")
+        numberPickerAmPm.minValue = 0
+        numberPickerAmPm.maxValue = (str.size -1)
+        numberPickerAmPm.displayedValues = str
+
+        println("${str.size} + ${str[0]} + ${str[1]}")
+        numberPickerHour.setOnValueChangedListener { numberPicker, _, _ ->
+            hour = numberPicker.value
+        }
+        numberPickerMinutes.setOnValueChangedListener { numberPicker, _, _ ->
+            min = numberPicker.value
+        }
+        numberPickerAmPm.setOnValueChangedListener { numberPicker, _, _ ->
+            val i = numberPicker.value
+            amOrPm = str[i]
+        }
 
         val appointmentId = intent.getStringExtra("appointmentId")
         val specializationApp = intent.getStringExtra("specialization")
@@ -40,8 +72,10 @@ class AdminAppointmentEditActivity : AppCompatActivity() {
         val buttonSubmit = findViewById<Button>(R.id.buttonSubmit)
 
         buttonSubmit.setOnClickListener {
-            prin()
+            updateAppointment(appointmentId)
         }
+
+
     }
 
     private fun doDropDown() {
@@ -55,8 +89,18 @@ class AdminAppointmentEditActivity : AppCompatActivity() {
     }
 
     private fun prin() {
-        val splitter = employee.split("-")
-        println("splited "+splitter[0].trim())
+        if(employee == null){
+            Toast.makeText(
+                this,
+                "Please a doctor",
+                Toast.LENGTH_LONG
+            ).show()
+        }else {
+            val splitter = employee.split("-")
+            println("splited " + splitter[0].trim())
+            pickedTime = "$hour : $min : $amOrPm"
+            println(pickedTime)
+        }
     }
 
 
@@ -112,12 +156,27 @@ class AdminAppointmentEditActivity : AppCompatActivity() {
             if (docData.size == 0) {
                 Toast.makeText(
                     this,
-                    "No available appointments",
+                    "No available $specializationApp",
                     Toast.LENGTH_LONG
                 ).show()
             }
         }
     }
 
+    private fun updateAppointment(appointmentId: String?) {
+        pickedTime = "$hour : $min : $amOrPm"
+        val splitter = employee.split("-")
+
+        database = FirebaseDatabase.getInstance().getReference("Appointment")
+        val updateData = mapOf(
+            "time" to pickedTime,
+            "doctor" to splitter[0].trim()
+        )
+        database.child(appointmentId!!).updateChildren(updateData)
+        Toast.makeText(this,"Updated",Toast.LENGTH_SHORT).show()
+
+        val intent = Intent(this, AdminActivity::class.java)
+        startActivity(intent)
+    }
 
 }

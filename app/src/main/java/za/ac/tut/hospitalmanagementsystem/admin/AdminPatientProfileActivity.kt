@@ -58,8 +58,7 @@ class AdminPatientProfileActivity : AppCompatActivity() {
         database.removeValue().addOnSuccessListener {
             Toast.makeText(this,"Patient removed", Toast.LENGTH_LONG).show()
         }
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frameLayout,adminPatientsFragment)
-        transaction.commit()
+        val intent = Intent(this, AdminActivity::class.java)
+        startActivity(intent)
     }
 }
