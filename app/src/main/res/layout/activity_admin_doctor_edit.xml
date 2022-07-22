@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.AddDoctorActivity"
+    tools:context=".admin.AdminDoctorEditActivity"
     android:background="#D4E1E3">
 
     <LinearLayout
@@ -16,9 +16,53 @@
             android:layout_marginTop="0dp"
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             app:srcCompat="@drawable/doctor"
             android:contentDescription="@string/todo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:text="@string/employee_id" />
+
+            <TextView
+                android:id="@+id/textViewEmployeeId"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"
+                android:textColor="#000000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:text="@string/doctor_identity" />
+
+            <TextView
+                android:id="@+id/textViewIDNo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textColor="#000000"
+                android:layout_marginStart="10dp"
+                android:textSize="20sp"/>
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameContainer"
@@ -36,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_profile"
-                android:hint="First Name"
+                android:hint="@string/first_name"
                 android:inputType="text"
                 android:minHeight="48dp"
                 android:drawablePadding="10dp"
@@ -61,35 +105,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_profile"
-                android:hint="Last Name"
+                android:hint="@string/last_name"
                 android:inputType="text"
-                android:minHeight="48dp"
-                android:drawablePadding="10dp"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="18sp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/idContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxStrokeColor="#000"
-            android:theme="@style/TextInputLayoutStyle"
-            style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
-            app:hintTextAppearance="@color/design_default_color_primary"
-            app:helperText="required"
-            app:counterEnabled="true"
-            app:counterMaxLength="13"
-            app:errorTextColor="@color/design_default_color_error">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_number"
-                android:hint="ID No"
-                android:inputType="number"
                 android:minHeight="48dp"
                 android:drawablePadding="10dp"
                 android:textColor="#000"
@@ -115,68 +132,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_phone"
-                android:hint="Phone Number"
+                android:hint="@string/phone_number"
                 android:inputType="number"
                 android:minHeight="48dp"
                 android:drawablePadding="10dp"
                 android:textColor="#000"
                 android:textColorHint="#000"
                 android:textSize="18sp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/AgeContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxStrokeColor="#000"
-            android:theme="@style/TextInputLayoutStyle"
-            style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
-            app:hintTextAppearance="@color/design_default_color_primary"
-            app:helperText="required"
-            app:errorTextColor="@color/design_default_color_error">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextAge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_number"
-                android:hint="Age"
-                android:inputType="number"
-                android:minHeight="48dp"
-                android:drawablePadding="10dp"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="18sp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:hint="Gender"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
-
-            <AutoCompleteTextView
-                android:id="@+id/auto_complete_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-        <!--<Spinner android:id="@+id/spinnerGender" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_gravity="center" android:gravity="center" android:popupBackground="@color/white" android:entries="@array/gender" android:layout_marginStart="10dp" android:layout_marginBottom="10dp" android:layout_marginTop="10dp" app:helperText="required" app:errorTextColor="@color/design_default_color_error"/>-->
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:hint="Specification"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
-
-        <AutoCompleteTextView
-            android:id="@+id/auto_complete_specification"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -195,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_office"
-                android:hint="Office"
+                android:hint="@string/office"
                 android:inputType="text"
                 android:minHeight="48dp"
                 android:drawablePadding="10dp"
@@ -220,7 +182,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_home"
-                android:hint="Address"
+                android:hint="@string/address"
                 android:inputType="text"
                 android:minHeight="48dp"
                 android:drawablePadding="10dp"
@@ -245,36 +207,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_email"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="text"
-                android:minHeight="48dp"
-                android:drawablePadding="10dp"
-                android:textColor="#000"
-                android:textColorHint="#000"
-                android:textSize="18sp"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxStrokeColor="#000"
-            android:theme="@style/TextInputLayoutStyle"
-            style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
-            app:hintTextAppearance="@color/design_default_color_primary"
-            app:helperText="required"
-            app:counterMaxLength="16"
-            app:counterEnabled="true"
-            app:passwordToggleEnabled="true"
-            app:errorTextColor="@color/design_default_color_error">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditTextPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_lock"
-                android:hint="create Password"
-                android:inputType="textPassword"
                 android:minHeight="48dp"
                 android:drawablePadding="10dp"
                 android:textColor="#000"
@@ -284,17 +218,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#037180">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/buttonSubmit"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Submit"
-                android:background="#037180"/>
+                android:layout_height="wrap_content"
+                android:text="@string/submit" />
+
         </LinearLayout>
 
     </LinearLayout>
+
 </ScrollView>

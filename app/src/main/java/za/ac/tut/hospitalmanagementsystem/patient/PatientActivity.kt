@@ -8,12 +8,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import za.ac.tut.hospitalmanagementsystem.R
 import za.ac.tut.hospitalmanagementsystem.fragments.AppointmentsFragment
 import za.ac.tut.hospitalmanagementsystem.fragments.DoctorFragment
+import za.ac.tut.hospitalmanagementsystem.fragments.ExtraFragment
 import za.ac.tut.hospitalmanagementsystem.fragments.SetAppointmentFragment
 
 class PatientActivity : AppCompatActivity() {
     private val appointmentsFragment = AppointmentsFragment()
     private val doctorFragment = DoctorFragment()
     private val setAppointmentFragment = SetAppointmentFragment()
+    private val extraFragment = ExtraFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,7 @@ class PatientActivity : AppCompatActivity() {
                 R.id.ic_doctor -> replaceFragment(doctorFragment)
                 R.id.ic_appointments -> replaceFragment(appointmentsFragment)
                 R.id.ic_setAppointment -> replaceFragment(setAppointmentFragment)
+                R.id.ic_extra -> replaceFragment(extraFragment)
             }
             true
         }

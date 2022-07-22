@@ -57,9 +57,36 @@ class AdminDoctorDetailsActivity : AppCompatActivity() {
         textViewAddress.text = address
         textViewSpecialization.text = specialization
 
+        buttonEdit.setOnClickListener {
+            goToEditPage(doctorId,firstName,lastName,idNo,phone,email,office,address)
+        }
+
         buttonDelete.setOnClickListener {
             deleteDoctor(doctorId)
         }
+    }
+
+    private fun goToEditPage(
+        doctorId: String,
+        firstName: String,
+        lastName: String,
+        idNo: String,
+        phone: String,
+        email: String,
+        office: String,
+        address: String
+    ) {
+
+        val intent = Intent(this, AdminDoctorEditActivity::class.java)
+        intent.putExtra("doctorId",doctorId)
+        intent.putExtra("firstName",firstName)
+        intent.putExtra("lastName",lastName)
+        intent.putExtra("idNo",idNo)
+        intent.putExtra("phone",phone)
+        intent.putExtra("email",email)
+        intent.putExtra("office",office)
+        intent.putExtra("address",address)
+        startActivity(intent)
     }
 
     private fun deleteDoctor(doctorId: String) {

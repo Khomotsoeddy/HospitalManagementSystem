@@ -6,12 +6,13 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import za.ac.tut.hospitalmanagementsystem.R
+import za.ac.tut.hospitalmanagementsystem.fragments.ExtraFragment
 
 class AdminActivity : AppCompatActivity() {
     private val adminAppointmentsFragment = AdminAppointmentsFragment()
     private val adminDoctorsFragment = AdminDoctorsFragment()
     private val adminPatientsFragment =AdminPatientsFragment()
-    private val adminExtraFragment = AdminExtraFragment()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

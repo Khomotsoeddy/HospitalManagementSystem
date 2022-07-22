@@ -3,14 +3,21 @@
 
     <item
         android:id="@+id/ic_doctor"
-        android:icon="@drawable/twitter"
+        android:icon="@drawable/doctor"
         android:title="Doctors"/>
+    <!---->
     <item
         android:id="@+id/ic_appointments"
-        android:icon="@drawable/facebook"
+        android:icon="@drawable/ic_patient_appointment_footer"
         android:title="Appointments"/>
+    <!---->
     <item
         android:id="@+id/ic_setAppointment"
-        android:icon="@drawable/facebook"
-        android:title="Set Appointment"/>
+        android:icon="@drawable/ic_appointment"
+        android:title="Book"/>
+    <!---->
+    <item
+        android:id="@+id/ic_extra"
+        android:icon="@drawable/ic_profile"
+        android:title="Profile" />
 </menu>

@@ -36,7 +36,6 @@ class AdminPatientProfileActivity : AppCompatActivity() {
         val textViewPhone = findViewById<TextView>(R.id.textViewPhone)
         val textViewEmail = findViewById<TextView>(R.id.textViewEmail)
         val textViewAddress = findViewById<TextView>(R.id.textViewAddress)
-        val buttonDelete = findViewById<Button>(R.id.buttonDelete)
 
         textViewFirstName.text = firstName
         textViewLastName.text = lastName
@@ -47,18 +46,5 @@ class AdminPatientProfileActivity : AppCompatActivity() {
         textViewEmail.text = email
         textViewAddress.text = address
 
-        buttonDelete.setOnClickListener {
-            deleteDoctor(idNo)
-        }
-    }
-
-    private fun deleteDoctor(idNo: String) {
-
-        database = FirebaseDatabase.getInstance().getReference("Patients").child(idNo)
-        database.removeValue().addOnSuccessListener {
-            Toast.makeText(this,"Patient removed", Toast.LENGTH_LONG).show()
-        }
-        val intent = Intent(this, AdminActivity::class.java)
-        startActivity(intent)
     }
 }

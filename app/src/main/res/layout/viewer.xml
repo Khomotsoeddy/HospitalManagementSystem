@@ -46,9 +46,9 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="120dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Description            : " />
+                    android:text="Description          : " />
 
                 <TextView
                     android:id="@+id/textViewDescription"
@@ -61,9 +61,9 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:text="Date Submitted     : " />
+                android:text="Date Submitted   : " />
 
             <TextView
                 android:id="@+id/textViewSubmitDate"
@@ -76,10 +76,10 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:textSize="12sp"
-                android:text="Appointment Date     :" />
+                android:text="Appointment Date    : " />
 
             <TextView
             android:id="@+id/textViewDate"
@@ -93,10 +93,10 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:textSize="12sp"
-                android:text="Appointment Time    :" />
+                android:text="Appointment Time   : " />
 
             <TextView
                 android:id="@+id/textViewTime"
@@ -109,9 +109,9 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:text="Doctor                    :" />
+                android:text="Doctor                    : " />
 
             <TextView
                 android:id="@+id/textViewDoctor"
@@ -124,9 +124,9 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:text="Specialization        :" />
+                android:text="Specialization       : " />
 
             <TextView
                 android:id="@+id/textViewSpecialization"
