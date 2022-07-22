@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.RadioButton
 import za.ac.tut.hospitalmanagementsystem.admin.AdminActivity
+import za.ac.tut.hospitalmanagementsystem.doctor.DoctorActivity
 import za.ac.tut.hospitalmanagementsystem.patient.PatientActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -33,7 +34,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToDoctorPage() {
-
+        val intent = Intent(this, DoctorActivity::class.java)
+        startActivity(intent)
     }
 
     private fun goToPatientPage() {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,8 +22,7 @@
             android:id="@+id/image"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:src="@drawable/doctor"
-            />
+            android:src="@drawable/ic_baseline_list_alt_24"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -40,7 +38,7 @@
                 android:layout_width="250dp"
                 android:layout_height="30dp"
                 android:textSize="20sp"
-                android:text="Doctor"
+                android:text="Record Id"
                 android:textAlignment="center" />
 
             <LinearLayout
@@ -48,12 +46,12 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Email                : " />
+                    android:text="Patient             : " />
 
                 <TextView
-                    android:id="@+id/textViewEmail"
+                    android:id="@+id/textViewPatient"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp" />
             </LinearLayout>
@@ -63,12 +61,12 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Cell Phone       :" />
+                    android:text="Medication      :" />
 
                 <TextView
-                    android:id="@+id/textViewPhone"
+                    android:id="@+id/textViewMedication"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"/>
 
@@ -79,12 +77,12 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Office No          :" />
+                    android:text="Allergy              :" />
 
                 <TextView
-                    android:id="@+id/textViewOffice"
+                    android:id="@+id/textViewAllergy"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"/>
 
@@ -95,12 +93,41 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Specialization  :" />
+                    android:text="Temperature   :" />
 
                 <TextView
-                    android:id="@+id/textViewSpecialization"
+                    android:id="@+id/textViewTemperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Weight              :" />
+
+                <TextView
+                    android:id="@+id/textViewWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Date                  :" />
+
+                <TextView
+                    android:id="@+id/textViewDate"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"/>
             </LinearLayout>
