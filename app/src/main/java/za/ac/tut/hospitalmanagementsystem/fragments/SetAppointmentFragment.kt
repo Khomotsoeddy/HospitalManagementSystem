@@ -11,12 +11,15 @@ import za.ac.tut.hospitalmanagementsystem.R
 import java.util.*
 import android.widget.ArrayAdapter
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import za.ac.tut.hospitalmanagementsystem.appointment.Appointments
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import kotlin.random.Random
 
 class SetAppointmentFragment : Fragment() {
@@ -26,6 +29,7 @@ class SetAppointmentFragment : Fragment() {
     private lateinit var pickedDate : String
     private lateinit var textViewEmail : TextView
     private lateinit var textViewPhone : TextView
+    private lateinit var date: TextInputEditText
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -49,6 +53,7 @@ class SetAppointmentFragment : Fragment() {
             myCalender.set(Calendar.MONTH,month)
             myCalender.set(Calendar.DAY_OF_MONTH,dayOfMonth)
             updateMyCalender(myCalender,view)
+
         }
 
         //button
@@ -59,7 +64,7 @@ class SetAppointmentFragment : Fragment() {
         }
         val buttonSubmit = view.findViewById<Button>(R.id.buttonSubmit)
         buttonSubmit.setOnClickListener {
-            submitAppointment()
+            submitAppointment(view)
         }
 
         adminDetails()
@@ -82,39 +87,82 @@ class SetAppointmentFragment : Fragment() {
     }
 
     private fun updateMyCalender(myCalender: Calendar,view: View) {
-        val date = view.findViewById<TextInputEditText>(R.id.textInputEditTextDate)
+        date = view.findViewById(R.id.textInputEditTextDate)
         val dFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
 
         date.setText(dFormat.format(myCalender.time))
         pickedDate = dFormat.format(myCalender.time).toString()
     }
 
-    private fun submitAppointment() {
+    private fun submitAppointment(view: View) {
+        var record = true
+
+        val descriptionRecord: String
+        val nowDate = Date()
+        val tomorrow = LocalDate.now().plusDays(30)
+        val dFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+        val currentDate = dFormat.format(nowDate).toString()
+
+        val formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
+        val tomorrowDate = tomorrow.format(formatter)
+
+
+        val current: LocalDate = LocalDate.parse(currentDate, formatter)
+        val maxRange: LocalDate = LocalDate.parse(tomorrowDate, formatter)
+        val chosenDate: LocalDate = LocalDate.parse(pickedDate, formatter)
+
+        if(date.text.toString().isEmpty()){
+            record = false
+            val dateContainer = view.findViewById<TextInputLayout>(R.id.dateContainer)
+            dateContainer.helperText = "Pick date"
+        }else{
+
+            if(current.isAfter(chosenDate)){
+                record = false
+                val dateContainer = view.findViewById<TextInputLayout>(R.id.dateContainer)
+                dateContainer.helperText = "Invalid date"
+            }
+
+            if(current.isEqual(chosenDate)){
+                record = false
+                val dateContainer = view.findViewById<TextInputLayout>(R.id.dateContainer)
+                dateContainer.helperText = "Invalid date"
+            }
+
+            if(maxRange.isBefore(chosenDate)){
+                record = false
+                val dateContainer = view.findViewById<TextInputLayout>(R.id.dateContainer)
+                dateContainer.helperText = "Date is out of range(30 days +)"
+            }
+        }
 
         val description = requireView().findViewById<TextInputEditText>(R.id.textInputEditTextDescription)
+
+        if(description.text.toString().isEmpty()){
+            record = false
+            descriptionRecord = "No description"
+        }else{
+            descriptionRecord = description.text.toString()
+        }
         val id =  "1234567654321"
         val randomValues = Random.nextInt(100000)
 
-        val date = Date()
-        val dFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
-        val currentDate = dFormat.format(date).toString()
+        if (record){
+            val database  = Firebase.database
+            val myref = database.getReference("Appointment").child(randomValues.toString())
 
+            myref.setValue(Appointments(
+                id,
+                "N/A",
+                spec,
+                descriptionRecord,
+                "N/A",
+                currentDate,
+                pickedDate,
+                "Pending"
+            ))
 
-        val database  = Firebase.database
-        val myref = database.getReference("Appointment").child(randomValues.toString())
-
-        myref.setValue(Appointments(
-            id,
-            "N/A",
-            spec,
-            description.text.toString(),
-            "N/A",
-            currentDate,
-            pickedDate,
-            "Pending"
-        ))
-
-        Toast.makeText(this.context,"Details sent", Toast.LENGTH_LONG).show()
-
+            Toast.makeText(this.context,"Details sent", Toast.LENGTH_LONG).show()
+        }
     }
 }

@@ -1,5 +1,6 @@
 package za.ac.tut.hospitalmanagementsystem.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import android.widget.Toast
 import com.google.firebase.database.*
 import za.ac.tut.hospitalmanagementsystem.appointment.Appointment
 import za.ac.tut.hospitalmanagementsystem.doctor.Doctor
+import za.ac.tut.hospitalmanagementsystem.patient.CancelAppointmentActivity
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -252,6 +254,12 @@ class AppointmentsFragment : Fragment() {
 
             myAdapter.setOnItemClickListener(object : AppointmentRecycleAdapter.onItemClickListener{
                 override fun onItemClick(position: Int) {
+                    val intent = Intent(this@AppointmentsFragment.requireContext(),CancelAppointmentActivity::class.java)
+                    intent.putExtra("appointmentId",appData[position].appointmentId)
+                    intent.putExtra("specialization",appData[position].specialization)
+                    intent.putExtra("description",appData[position].description)
+                    intent.putExtra("date",appData[position].date)
+                    startActivity(intent)
                 }
 
             })

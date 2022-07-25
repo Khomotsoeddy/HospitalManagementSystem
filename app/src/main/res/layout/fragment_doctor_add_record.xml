@@ -3,12 +3,159 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".doctor.DoctorAddRecordFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_marginTop="0dp"
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                app:srcCompat="@drawable/medical_report" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/idContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="#000"
+                android:theme="@style/TextInputLayoutStyle"
+                style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+                app:hintTextAppearance="@color/design_default_color_primary"
+                app:helperText="required"
+                app:counterEnabled="true"
+                app:counterMaxLength="13"
+                app:errorTextColor="@color/design_default_color_error">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_number"
+                    android:hint="ID No"
+                    android:inputType="number"
+                    android:minHeight="48dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#000"
+                    android:textSize="18sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/medicationContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="#000"
+                android:theme="@style/TextInputLayoutStyle"
+                style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+                app:hintTextAppearance="@color/design_default_color_primary"
+                app:helperText="required"
+                app:errorTextColor="@color/design_default_color_error">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextMedication"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_baseline_medication_liquid_24"
+                    android:hint="Medication"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#000"
+                    android:textSize="18sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/allergyContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="#000"
+                android:theme="@style/TextInputLayoutStyle"
+                style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+                app:hintTextAppearance="@color/design_default_color_primary"
+                app:helperText="required"
+                app:errorTextColor="@color/design_default_color_error">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextAllergy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_sick"
+                    android:hint="Allergy or N/A"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#000"
+                    android:textSize="18sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/weightContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="#000"
+                android:theme="@style/TextInputLayoutStyle"
+                style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+                app:hintTextAppearance="@color/design_default_color_primary"
+                app:helperText="required"
+                app:errorTextColor="@color/design_default_color_error">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_scale"
+                    android:hint="Weight"
+                    android:inputType="numberDecimal"
+                    android:minHeight="48dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#000"
+                    android:textSize="18sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/temperatureContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="#000"
+                android:theme="@style/TextInputLayoutStyle"
+                style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
+                app:hintTextAppearance="@color/design_default_color_primary"
+                app:helperText="required"
+                app:errorTextColor="@color/design_default_color_error">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextTemperature"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_thermostat"
+                    android:hint="Temperature"
+                    android:inputType="numberDecimal"
+                    android:minHeight="48dp"
+                    android:drawablePadding="10dp"
+                    android:textColor="#000"
+                    android:textColorHint="#000"
+                    android:textSize="18sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/buttonSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/submit" />
+        </LinearLayout>
+
+    </ScrollView>
 </FrameLayout>

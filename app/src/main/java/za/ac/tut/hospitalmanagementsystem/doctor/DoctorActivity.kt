@@ -22,9 +22,9 @@ class DoctorActivity : AppCompatActivity() {
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigationAdmin)
         bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.ic_admin_appointments -> replaceFragmentAdmin(doctorAppointmentFragment)
-                R.id.ic_admin_doctor -> replaceFragmentAdmin(doctorAddRecordFragment)
-                R.id.ic_admin_patient -> replaceFragmentAdmin(doctorProfileFragment)
+                R.id.ic_appointments -> replaceFragmentAdmin(doctorAppointmentFragment)
+                R.id.ic_records -> replaceFragmentAdmin(doctorAddRecordFragment)
+                R.id.ic_extra -> replaceFragmentAdmin(doctorProfileFragment)
                 //R.id.ic_admin_additional -> replaceFragmentAdmin(adminExtraFragment)
             }
             true

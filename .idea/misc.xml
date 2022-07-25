@@ -11,6 +11,7 @@
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_admin_doctor_details.xml" value="0.15" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_admin_doctor_edit.xml" value="0.1" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_admin_patient_profile.xml" value="0.2" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_cancel_appointment.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_doctor.xml" value="0.1859375" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_edit_patient_profile.xml" value="0.1859375" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_extra.xml" value="0.2" />
@@ -19,11 +20,14 @@
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_patient.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_patient_record.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/activity_patient_register.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/appointment_view.xml" value="0.33" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/drop_down.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_appointment.xml" value="0.1" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_appointment_admin.xml" value="0.1" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_appointments.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_doctor.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_doctor_add_record.xml" value="0.1" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_doctor_appointment.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_doctors.xml" value="0.1859375" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_doctors_admin.xml" value="0.1" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_extra.xml" value="0.2" />
@@ -32,7 +36,7 @@
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_patients_admin.xml" value="0.2" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/fragment_setappointment.xml" value="0.22" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/patient_row.xml" value="0.1" />
-        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/record_viewer.xml" value="0.19692307692307692" />
+        <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/record_viewer.xml" value="0.25" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/row.xml" value="0.33" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/view.xml" value="0.25" />
         <entry key="..\:/Users/Asus/Desktop/SWP316D/Project/HospitalManagementSystem/app/src/main/res/layout/viewer.xml" value="0.5" />

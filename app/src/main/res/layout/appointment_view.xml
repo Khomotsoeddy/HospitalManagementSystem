@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cart_view"
+    android:id="@+id/cart_view_admin"
     android:layout_margin="5dp"
     app:cardBackgroundColor="#037180"
     app:cardCornerRadius="25dp"
@@ -20,9 +21,9 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/image"
+            android:src="@drawable/ic_appointment"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:src="@drawable/ic_baseline_list_alt_24"/>
+            app:layout_constraintLeft_toLeftOf="parent" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -34,12 +35,11 @@
 
 
             <TextView
-                android:id="@+id/textViewId"
+                android:id="@+id/textViewAppointmentId"
                 android:layout_width="250dp"
-                android:layout_height="30dp"
-                android:textSize="20sp"
-                android:text="Record Id"
-                android:textAlignment="center" />
+                android:layout_height="20dp"
+                android:text="appointment number"
+                android:textAlignment="center"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Patient Id         :" />
+                    android:text="Patient Name     : " />
 
                 <TextView
                     android:id="@+id/textViewPatient"
@@ -63,13 +63,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Medication      :" />
+                    android:text="Description         : " />
 
                 <TextView
-                    android:id="@+id/textViewMedication"
+                    android:id="@+id/textViewDescription"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"/>
-
+                    android:layout_height="30dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -79,55 +78,28 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="Allergy              :" />
-
-                <TextView
-                    android:id="@+id/textViewAllergy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:text="Temperature   :" />
-
-                <TextView
-                    android:id="@+id/textViewTemperature"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:text="Weight              :" />
-
-                <TextView
-                    android:id="@+id/textViewWeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:text="Date                  :" />
+                    android:textSize="12sp"
+                    android:text="Appointment Date  : " />
 
                 <TextView
                     android:id="@+id/textViewDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:textSize="12sp"
+                    android:text="Appointment Time : " />
+
+                <TextView
+                    android:id="@+id/textViewTime"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"/>
             </LinearLayout>
