@@ -24,35 +24,38 @@ class PatientRecordActivity : AppCompatActivity() {
 
         idNo = intent.getStringExtra("idNo").toString()
 
-        loadReports()
+        loadReports(idNo)
     }
 
-    private fun loadReports() {
+    private fun loadReports(idNo: String) {
         reports.clear()
         database = FirebaseDatabase.getInstance().getReference("MedicalReports")
         database.get().addOnSuccessListener {
             for (i in it.children) {
-                val recordNo = i.key.toString()
                 val patientId = i.child("patientId").value.toString()
-                val medication = i.child("medication").value.toString()
-                val allergy = i.child("allergy").value.toString()
-                val weight = i.child("weight").value.toString()
-                val temperature = i.child("temperature").value.toString()
-                val date = i.child("date").value.toString()
+                if(idNo.contentEquals(patientId)){
+                    val recordNo = i.key.toString()
+                    val patientId = i.child("patientId").value.toString()
+                    val medication = i.child("medication").value.toString()
+                    val allergy = i.child("allergy").value.toString()
+                    val weight = i.child("weight").value.toString()
+                    val temperature = i.child("temperature").value.toString()
+                    val date = i.child("date").value.toString()
 
-                val report = MedicalReport(
-                    recordNo,
-                    patientId,
-                    medication,
-                    allergy,
-                    weight,
-                    temperature,
-                    date
-                )
-                reports.add(report)
+                    val report = MedicalReport(
+                        recordNo,
+                        patientId,
+                        medication,
+                        allergy,
+                        weight,
+                        temperature,
+                        date
+                    )
+                    reports.add(report)
+                }
             }
             if (reports.size == 0) {
-                Toast.makeText(this, "No available appointments", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "No available record", Toast.LENGTH_LONG).show()
             }
 
             recyclerView = findViewById(R.id.recyclerViewView)

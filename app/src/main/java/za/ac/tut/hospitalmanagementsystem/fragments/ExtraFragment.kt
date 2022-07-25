@@ -36,10 +36,14 @@ class ExtraFragment : Fragment() {
         // Inflate the layout for this fragment
         val view : View =  inflater.inflate(R.layout.fragment_extra_admin, container, false)
 
+        val data = arguments
+        val patientId = data?.get("patientId").toString()
+
+        println(patientId)
         val buttonSubmit = view.findViewById<Button>(R.id.buttonSubmit)
         val buttonMedical = view.findViewById<Button>(R.id.buttonMedical)
 
-        loadPatient(view)
+        loadPatient(view,patientId)
 
         buttonMedical.setOnClickListener {
             goToRecords(textViewIDNo)
@@ -57,14 +61,14 @@ class ExtraFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun loadPatient(view: View) {
+    private fun loadPatient(view: View, patientId: String) {
         database = FirebaseDatabase.getInstance().getReference("Patients")
         database.get().addOnSuccessListener {
             for(i in it.children){
 
                 val idNo = i.key.toString()
 
-                if(idNo.contentEquals("1234567654321")){
+                if(idNo.contentEquals(patientId)){
                     val firstName = i.child("firstName").value.toString()
                     val lastName = i.child("lastName").value.toString()
                     val age = i.child("age").value.toString()

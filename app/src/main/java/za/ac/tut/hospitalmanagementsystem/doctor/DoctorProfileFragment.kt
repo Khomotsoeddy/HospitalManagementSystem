@@ -16,6 +16,12 @@ class DoctorProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         val view:View = return inflater.inflate(R.layout.fragment_doctor_profile, container, false)
 
+        val data = arguments
+        val doctorId = data?.get("doctorId").toString()
+
+        println(doctorId)
+
+
         return view
     }
 }

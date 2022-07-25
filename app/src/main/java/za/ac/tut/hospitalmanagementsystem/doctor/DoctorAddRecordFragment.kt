@@ -26,6 +26,10 @@ class DoctorAddRecordFragment : Fragment() {
         // Inflate the layout for this fragment
         val view:View = inflater.inflate(R.layout.fragment_doctor_add_record, container, false)
 
+        val data = arguments
+        val doctorId = data?.get("doctorId").toString()
+
+        println(doctorId)
         val buttonSubmit = view.findViewById<Button>(R.id.buttonSubmit)
 
         buttonSubmit.setOnClickListener {

@@ -22,21 +22,25 @@ class PatientActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient)
 
+        val patientId = intent.getStringExtra("patientId")
         MobileAds.initialize(this.applicationContext) {}
-        replaceFragment(doctorFragment)
+        replaceFragment(doctorFragment,patientId)
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigation.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.ic_doctor -> replaceFragment(doctorFragment)
-                R.id.ic_appointments -> replaceFragment(appointmentsFragment)
-                R.id.ic_setAppointment -> replaceFragment(setAppointmentFragment)
-                R.id.ic_extra -> replaceFragment(extraFragment)
+                R.id.ic_doctor -> replaceFragment(doctorFragment, patientId)
+                R.id.ic_appointments -> replaceFragment(appointmentsFragment, patientId)
+                R.id.ic_setAppointment -> replaceFragment(setAppointmentFragment, patientId)
+                R.id.ic_extra -> replaceFragment(extraFragment, patientId)
             }
             true
         }
     }
-    private fun replaceFragment(fragment: Fragment){
+    private fun replaceFragment(fragment: Fragment, patientId: String?){
+        val bundle = Bundle()
+        bundle.putString("patientId",patientId)
+        fragment.arguments = bundle
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.frameLayout,fragment)
         transaction.commit()

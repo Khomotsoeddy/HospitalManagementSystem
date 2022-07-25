@@ -35,6 +35,11 @@ class SetAppointmentFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_setappointment, container, false)
 
+        val data = arguments
+        val patientId = data?.get("patientId").toString()
+
+        println(patientId)
+
         textViewEmail = view.findViewById(R.id.textViewEmail)
         textViewPhone = view.findViewById(R.id.textViewPhone)
         val pickDate  = view.findViewById<Button>(R.id.buttonPickDate)
@@ -64,7 +69,7 @@ class SetAppointmentFragment : Fragment() {
         }
         val buttonSubmit = view.findViewById<Button>(R.id.buttonSubmit)
         buttonSubmit.setOnClickListener {
-            submitAppointment(view)
+            submitAppointment(view,patientId)
         }
 
         adminDetails()
@@ -94,7 +99,7 @@ class SetAppointmentFragment : Fragment() {
         pickedDate = dFormat.format(myCalender.time).toString()
     }
 
-    private fun submitAppointment(view: View) {
+    private fun submitAppointment(view: View, patientId: String) {
         var record = true
 
         val descriptionRecord: String
@@ -144,7 +149,7 @@ class SetAppointmentFragment : Fragment() {
         }else{
             descriptionRecord = description.text.toString()
         }
-        val id =  "1234567654321"
+        //val id =  "1234567654321"
         val randomValues = Random.nextInt(100000)
 
         if (record){
@@ -152,7 +157,7 @@ class SetAppointmentFragment : Fragment() {
             val myref = database.getReference("Appointment").child(randomValues.toString())
 
             myref.setValue(Appointments(
-                id,
+                patientId,
                 "N/A",
                 spec,
                 descriptionRecord,
@@ -163,6 +168,8 @@ class SetAppointmentFragment : Fragment() {
             ))
 
             Toast.makeText(this.context,"Details sent", Toast.LENGTH_LONG).show()
+            date.text?.clear()
+            description.text?.clear()
         }
     }
 }

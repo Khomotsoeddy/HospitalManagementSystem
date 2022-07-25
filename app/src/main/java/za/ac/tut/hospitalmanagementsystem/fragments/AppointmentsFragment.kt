@@ -39,7 +39,11 @@ class AppointmentsFragment : Fragment() {
         val view : View =  inflater.inflate(R.layout.fragment_appointments, container, false)
         getTheDoctorDetail()
 
-        displayAllAppointments(view)
+        val data = arguments
+        val patientId = data?.get("patientId").toString()
+
+        println(patientId)
+        displayAllAppointments(view,patientId)
 
         val buttonAll = view.findViewById<Button>(R.id.buttonAll)
         val buttonToday = view.findViewById<Button>(R.id.buttonToday)
@@ -47,61 +51,65 @@ class AppointmentsFragment : Fragment() {
         val buttonPast = view.findViewById<Button>(R.id.buttonPast)
 
         buttonAll.setOnClickListener {
-            getAppointmentsList(view)
+            getAppointmentsList(view,patientId)
         }
 
         buttonToday.setOnClickListener {
-            getTodayAppointment(view)
+            getTodayAppointment(view,patientId)
         }
 
         buttonComing.setOnClickListener {
-            getUpcomingAppointments(view)
+            getUpcomingAppointments(view,patientId)
         }
 
         buttonPast.setOnClickListener {
-            getPastAppointments(view)
+            getPastAppointments(view,patientId)
         }
 
         return view
     }
 
-    private fun displayAllAppointments(view: View){
+    private fun displayAllAppointments(view: View, patientId: String){
         appData.clear()
         doctorDetails.clear()
         database = FirebaseDatabase.getInstance().getReference("Appointment")
         database.get().addOnSuccessListener {
             for(i in it.children) {
-                val appointmentId = i.key.toString()
-                val doctor = i.child("doctor").value.toString()
-                val date = i.child("date").value.toString()
                 val patient = i.child("patient").value.toString()
-                val specialization = i.child("specialization").value.toString()
-                val status = i.child("status").value.toString()
-                val submitDate = i.child("submitDate").value.toString()
-                val time = i.child("time").value.toString()
-                val description = i.child("description").value.toString()
 
-                val appoint = Appointment(
-                    appointmentId,
-                    patient,
-                    doctor,
-                    specialization,
-                    description,
-                    time,
-                    submitDate,
-                    date,
-                    status
-                )
+                if (patientId.contentEquals(patient)){
+                    val appointmentId = i.key.toString()
+                    val doctor = i.child("doctor").value.toString()
+                    val date = i.child("date").value.toString()
+                    val patient = i.child("patient").value.toString()
+                    val specialization = i.child("specialization").value.toString()
+                    val status = i.child("status").value.toString()
+                    val submitDate = i.child("submitDate").value.toString()
+                    val time = i.child("time").value.toString()
+                    val description = i.child("description").value.toString()
 
-                appData.add(appoint)
-                for(j in doctorNames) {
+                    val appoint = Appointment(
+                        appointmentId,
+                        patient,
+                        doctor,
+                        specialization,
+                        description,
+                        time,
+                        submitDate,
+                        date,
+                        status
+                    )
 
-                    val realName = j.split(" ")
+                    appData.add(appoint)
+                    for(j in doctorNames) {
 
-                    if (doctor.contentEquals(realName[0])) {
-                        doctorDetails.add("Dr "+realName[1] + " " + realName[2])
-                    } else if (doctor.contentEquals("N/A")) {
-                        doctorDetails.add("N/A")
+                        val realName = j.split(" ")
+
+                        if (doctor.contentEquals(realName[0])) {
+                            doctorDetails.add("Dr "+realName[1] + " " + realName[2])
+                        } else if (doctor.contentEquals("N/A")) {
+                            doctorDetails.add("N/A")
+                        }
                     }
                 }
             }
@@ -128,7 +136,7 @@ class AppointmentsFragment : Fragment() {
         }
     }
 
-    private fun getPastAppointments(view: View) {
+    private fun getPastAppointments(view: View, patientId: String) {
         val date = Date()
         val dFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
         val currentDate = dFormat.format(date).toString()
@@ -142,31 +150,45 @@ class AppointmentsFragment : Fragment() {
         database = FirebaseDatabase.getInstance().getReference("Appointment")
         database.get().addOnSuccessListener {
             for(i in it.children){
-                val date = i.child("date").value.toString()
-                val chosenDate: LocalDate = LocalDate.parse(date, formatter)
+                val patient = i.child("patient").value.toString()
 
-                if(current.isAfter(chosenDate)){
-                    val appointmentId = i.key.toString()
-                    val doctor = i.child("doctor").value.toString()
+                if (patientId.contentEquals(patient)) {
                     val date = i.child("date").value.toString()
-                    val patient = i.child("patient").value.toString()
-                    val specialization = i.child("specialization").value.toString()
-                    val status = i.child("status").value.toString()
-                    val submitDate = i.child("submitDate").value.toString()
-                    val time = i.child("time").value.toString()
-                    val description = i.child("description").value.toString()
+                    val chosenDate: LocalDate = LocalDate.parse(date, formatter)
 
-                    val appoint = Appointment(appointmentId,patient,doctor,specialization,description,time,submitDate,date,status)
+                    if (current.isAfter(chosenDate)) {
+                        val appointmentId = i.key.toString()
+                        val doctor = i.child("doctor").value.toString()
+                        val date = i.child("date").value.toString()
+                        val patient = i.child("patient").value.toString()
+                        val specialization = i.child("specialization").value.toString()
+                        val status = i.child("status").value.toString()
+                        val submitDate = i.child("submitDate").value.toString()
+                        val time = i.child("time").value.toString()
+                        val description = i.child("description").value.toString()
 
-                    appData.add(appoint)
-                    for(j in doctorNames) {
+                        val appoint = Appointment(
+                            appointmentId,
+                            patient,
+                            doctor,
+                            specialization,
+                            description,
+                            time,
+                            submitDate,
+                            date,
+                            status
+                        )
 
-                        val realName = j.split(" ")
+                        appData.add(appoint)
+                        for (j in doctorNames) {
 
-                        if (doctor.contentEquals(realName[0])) {
-                            doctorDetails.add("Dr "+realName[1] + " " + realName[2])
-                        } else if (doctor.contentEquals("N/A")) {
-                            doctorDetails.add("N/A")
+                            val realName = j.split(" ")
+
+                            if (doctor.contentEquals(realName[0])) {
+                                doctorDetails.add("Dr " + realName[1] + " " + realName[2])
+                            } else if (doctor.contentEquals("N/A")) {
+                                doctorDetails.add("N/A")
+                            }
                         }
                     }
                 }
@@ -195,7 +217,7 @@ class AppointmentsFragment : Fragment() {
         }
     }
 
-    private fun getUpcomingAppointments(view: View) {
+    private fun getUpcomingAppointments(view: View, patientId: String) {
         val date = Date()
         val dFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
         val currentDate = dFormat.format(date).toString()
@@ -210,31 +232,45 @@ class AppointmentsFragment : Fragment() {
         database = FirebaseDatabase.getInstance().getReference("Appointment")
         database.get().addOnSuccessListener {
             for(i in it.children){
-                val date = i.child("date").value.toString()
-                val chosenDate: LocalDate = LocalDate.parse(date, formatter)
+                val patient = i.child("patient").value.toString()
 
-                if(current.isBefore(chosenDate)){
-                    val appointmentId = i.key.toString()
-                    val doctor = i.child("doctor").value.toString()
+                if (patientId.contentEquals(patient)) {
                     val date = i.child("date").value.toString()
-                    val patient = i.child("patient").value.toString()
-                    val specialization = i.child("specialization").value.toString()
-                    val status = i.child("status").value.toString()
-                    val submitDate = i.child("submitDate").value.toString()
-                    val time = i.child("time").value.toString()
-                    val description = i.child("description").value.toString()
+                    val chosenDate: LocalDate = LocalDate.parse(date, formatter)
 
-                    val appoint = Appointment(appointmentId,patient,doctor,specialization,description,time,submitDate,date,status)
+                    if (current.isBefore(chosenDate)) {
+                        val appointmentId = i.key.toString()
+                        val doctor = i.child("doctor").value.toString()
+                        val date = i.child("date").value.toString()
+                        val patient = i.child("patient").value.toString()
+                        val specialization = i.child("specialization").value.toString()
+                        val status = i.child("status").value.toString()
+                        val submitDate = i.child("submitDate").value.toString()
+                        val time = i.child("time").value.toString()
+                        val description = i.child("description").value.toString()
 
-                    appData.add(appoint)
-                    for(j in doctorNames) {
+                        val appoint = Appointment(
+                            appointmentId,
+                            patient,
+                            doctor,
+                            specialization,
+                            description,
+                            time,
+                            submitDate,
+                            date,
+                            status
+                        )
 
-                        val realName = j.split(" ")
+                        appData.add(appoint)
+                        for (j in doctorNames) {
 
-                        if (doctor.contentEquals(realName[0])) {
-                            doctorDetails.add("Dr "+realName[1] + " " + realName[2])
-                        } else if (doctor.contentEquals("N/A")) {
-                            doctorDetails.add("N/A")
+                            val realName = j.split(" ")
+
+                            if (doctor.contentEquals(realName[0])) {
+                                doctorDetails.add("Dr " + realName[1] + " " + realName[2])
+                            } else if (doctor.contentEquals("N/A")) {
+                                doctorDetails.add("N/A")
+                            }
                         }
                     }
                 }
@@ -268,7 +304,7 @@ class AppointmentsFragment : Fragment() {
         }
     }
 
-    private fun getTodayAppointment(view: View) {
+    private fun getTodayAppointment(view: View, patientId: String) {
         val date = Date()
         val dFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
         val currentDate = dFormat.format(date).toString()
@@ -282,32 +318,46 @@ class AppointmentsFragment : Fragment() {
         database = FirebaseDatabase.getInstance().getReference("Appointment")
         database.get().addOnSuccessListener {
             for(i in it.children){
-                val date = i.child("date").value.toString()
-                val chosenDate: LocalDate = LocalDate.parse(date, formatter)
+                val patient = i.child("patient").value.toString()
 
-                if(current.isEqual(chosenDate)){
-                    val appointmentId = i.key.toString()
-                    val doctor = i.child("doctor").value.toString()
+                if (patientId.contentEquals(patient)) {
                     val date = i.child("date").value.toString()
-                    val patient = i.child("patient").value.toString()
-                    val specialization = i.child("specialization").value.toString()
-                    val status = i.child("status").value.toString()
-                    val submitDate = i.child("submitDate").value.toString()
-                    val time = i.child("time").value.toString()
-                    val description = i.child("description").value.toString()
+                    val chosenDate: LocalDate = LocalDate.parse(date, formatter)
 
-                    val appoint = Appointment(appointmentId,patient,doctor,specialization,description,time,submitDate,date,status)
+                    if (current.isEqual(chosenDate)) {
+                        val appointmentId = i.key.toString()
+                        val doctor = i.child("doctor").value.toString()
+                        val date = i.child("date").value.toString()
+                        val patient = i.child("patient").value.toString()
+                        val specialization = i.child("specialization").value.toString()
+                        val status = i.child("status").value.toString()
+                        val submitDate = i.child("submitDate").value.toString()
+                        val time = i.child("time").value.toString()
+                        val description = i.child("description").value.toString()
+
+                        val appoint = Appointment(
+                            appointmentId,
+                            patient,
+                            doctor,
+                            specialization,
+                            description,
+                            time,
+                            submitDate,
+                            date,
+                            status
+                        )
 
 
-                    appData.add(appoint)
-                    for(j in doctorNames) {
+                        appData.add(appoint)
+                        for (j in doctorNames) {
 
-                        val realName = j.split(" ")
+                            val realName = j.split(" ")
 
-                        if (doctor.contentEquals(realName[0])) {
-                            doctorDetails.add("Dr "+realName[1] + " " + realName[2])
-                        } else if (doctor.contentEquals("N/A")) {
-                            doctorDetails.add("N/A")
+                            if (doctor.contentEquals(realName[0])) {
+                                doctorDetails.add("Dr " + realName[1] + " " + realName[2])
+                            } else if (doctor.contentEquals("N/A")) {
+                                doctorDetails.add("N/A")
+                            }
                         }
                     }
                 }
@@ -336,34 +386,49 @@ class AppointmentsFragment : Fragment() {
         }
     }
 
-    private fun getAppointmentsList(view: View) {
+    private fun getAppointmentsList(view: View, patientId: String) {
         appData.clear()
         doctorDetails.clear()
         database = FirebaseDatabase.getInstance().getReference("Appointment")
         database.get().addOnSuccessListener {
             for(i in it.children){
-                val appointmentId = i.key.toString()
-                val doctor = i.child("doctor").value.toString()
-                val date = i.child("date").value.toString()
+
                 val patient = i.child("patient").value.toString()
-                val specialization = i.child("specialization").value.toString()
-                val status = i.child("status").value.toString()
-                val submitDate = i.child("submitDate").value.toString()
-                val time = i.child("time").value.toString()
-                val description = i.child("description").value.toString()
 
-                val appoint = Appointment(appointmentId,patient,doctor,specialization,description,time,submitDate,date,status)
+                if (patientId.contentEquals(patient)) {
+                    val appointmentId = i.key.toString()
+                    val doctor = i.child("doctor").value.toString()
+                    val date = i.child("date").value.toString()
+                    val patient = i.child("patient").value.toString()
+                    val specialization = i.child("specialization").value.toString()
+                    val status = i.child("status").value.toString()
+                    val submitDate = i.child("submitDate").value.toString()
+                    val time = i.child("time").value.toString()
+                    val description = i.child("description").value.toString()
+
+                    val appoint = Appointment(
+                        appointmentId,
+                        patient,
+                        doctor,
+                        specialization,
+                        description,
+                        time,
+                        submitDate,
+                        date,
+                        status
+                    )
 
 
-                appData.add(appoint)
-                for(j in doctorNames) {
+                    appData.add(appoint)
+                    for (j in doctorNames) {
 
-                    val realName = j.split(" ")
+                        val realName = j.split(" ")
 
-                    if (doctor.contentEquals(realName[0])) {
-                        doctorDetails.add("Dr "+realName[1] + " " + realName[2])
-                    } else if (doctor.contentEquals("N/A")) {
-                        doctorDetails.add("N/A")
+                        if (doctor.contentEquals(realName[0])) {
+                            doctorDetails.add("Dr " + realName[1] + " " + realName[2])
+                        } else if (doctor.contentEquals("N/A")) {
+                            doctorDetails.add("N/A")
+                        }
                     }
                 }
             }
