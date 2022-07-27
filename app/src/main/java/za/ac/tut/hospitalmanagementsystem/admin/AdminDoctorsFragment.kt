@@ -46,12 +46,339 @@ class AdminDoctorsFragment : Fragment() {
         val buttonOptometrist = view.findViewById<Button>(R.id.buttonOptometrist)
 
         buttonAll.setOnClickListener {
-
+            displayAllDoctors(view)
         }
 
+        buttonOptometrist.setOnClickListener {
+            displayOptometrist(view)
+        }
 
+        buttonDentists.setOnClickListener {
+            displayDentists(view)
+        }
+
+        buttonDermatologist.setOnClickListener {
+            displayDermatologists(view)
+        }
+
+        buttonGynaecologist.setOnClickListener {
+            displayGynaecologists(view)
+        }
         return view
     }
+
+    private fun displayOptometrist(view: View) {
+
+        docData.clear()
+        database = FirebaseDatabase.getInstance().getReference("Doctors")
+        database.get().addOnSuccessListener {
+            for(i in it.children) {
+                val specialization = i.child("specialization").value.toString()
+
+                if (specialization.contentEquals("Optometrist")) {
+
+                    val doctorId = i.key.toString()
+                    val firstName = i.child("firstName").value.toString()
+                    val lastName = i.child("lastName").value.toString()
+                    val age = i.child("age").value.toString()
+                    val gender = i.child("gender").value.toString()
+                    val email = i.child("email").value.toString()
+                    val phone = i.child("phone").value.toString()
+                    val address = i.child("address").value.toString()
+                    val idNo = i.child("idNo").value.toString()
+                    val role = i.child("role").value.toString()
+                    val office = i.child("office").value.toString()
+                    val specialization = i.child("specialization").value.toString()
+
+                    val doc = Doctor(
+                        doctorId,
+                        firstName,
+                        lastName,
+                        idNo,
+                        age,
+                        gender,
+                        phone,
+                        email,
+                        office,
+                        address,
+                        specialization,
+                        role
+                    )
+
+                    docData.add(doc)
+                }
+            }
+
+            if(docData.size == 0){
+                Toast.makeText(this.requireContext(),"No available appointments", Toast.LENGTH_LONG).show()
+            }
+
+
+            recyclerView = view.findViewById(R.id.recyclerView)
+
+            recyclerView.layoutManager  = LinearLayoutManager(this.context)
+            recyclerView.setHasFixedSize(true)
+
+            images.add(R.drawable.doctor)
+            val myAdapter = RecycleAdapter(docData,images)
+            recyclerView.adapter = myAdapter
+
+            myAdapter.setOnItemClickListener(object : RecycleAdapter.onItemClickListener{
+                override fun onItemClick(position: Int) {
+                    val intent = Intent(this@AdminDoctorsFragment.requireContext(), AdminDoctorDetailsActivity::class.java)
+                    intent.putExtra("doctorId",docData.get(position).doctorId)
+                    intent.putExtra("firstName",docData.get(position).firstName)
+                    intent.putExtra("lastName",docData.get(position).lastName)
+                    intent.putExtra("idNo",docData.get(position).idNo)
+                    intent.putExtra("age",docData.get(position).age)
+                    intent.putExtra("gender",docData.get(position).gender)
+                    intent.putExtra("phone",docData.get(position).phone)
+                    intent.putExtra("email",docData.get(position).email)
+                    intent.putExtra("office",docData.get(position).office)
+                    intent.putExtra("address",docData.get(position).address)
+                    intent.putExtra("specialization",docData.get(position).specialization)
+                    startActivity(intent)
+                }
+            })
+        }.addOnFailureListener {
+            Toast.makeText(this.context,"failed", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun displayGynaecologists(view: View) {
+
+        docData.clear()
+        database = FirebaseDatabase.getInstance().getReference("Doctors")
+        database.get().addOnSuccessListener {
+            for(i in it.children) {
+                val specialization = i.child("specialization").value.toString()
+
+                if (specialization.contentEquals("Gynaecologist")) {
+
+                    val doctorId = i.key.toString()
+                    val firstName = i.child("firstName").value.toString()
+                    val lastName = i.child("lastName").value.toString()
+                    val age = i.child("age").value.toString()
+                    val gender = i.child("gender").value.toString()
+                    val email = i.child("email").value.toString()
+                    val phone = i.child("phone").value.toString()
+                    val address = i.child("address").value.toString()
+                    val idNo = i.child("idNo").value.toString()
+                    val role = i.child("role").value.toString()
+                    val office = i.child("office").value.toString()
+                    val specialization = i.child("specialization").value.toString()
+
+                    val doc = Doctor(
+                        doctorId,
+                        firstName,
+                        lastName,
+                        idNo,
+                        age,
+                        gender,
+                        phone,
+                        email,
+                        office,
+                        address,
+                        specialization,
+                        role
+                    )
+
+                    docData.add(doc)
+                }
+            }
+
+            if(docData.size == 0){
+                Toast.makeText(this.requireContext(),"No available appointments", Toast.LENGTH_LONG).show()
+            }
+
+
+            recyclerView = view.findViewById(R.id.recyclerView)
+
+            recyclerView.layoutManager  = LinearLayoutManager(this.context)
+            recyclerView.setHasFixedSize(true)
+
+            images.add(R.drawable.doctor)
+            val myAdapter = RecycleAdapter(docData,images)
+            recyclerView.adapter = myAdapter
+
+            myAdapter.setOnItemClickListener(object : RecycleAdapter.onItemClickListener{
+                override fun onItemClick(position: Int) {
+                    val intent = Intent(this@AdminDoctorsFragment.requireContext(), AdminDoctorDetailsActivity::class.java)
+                    intent.putExtra("doctorId",docData.get(position).doctorId)
+                    intent.putExtra("firstName",docData.get(position).firstName)
+                    intent.putExtra("lastName",docData.get(position).lastName)
+                    intent.putExtra("idNo",docData.get(position).idNo)
+                    intent.putExtra("age",docData.get(position).age)
+                    intent.putExtra("gender",docData.get(position).gender)
+                    intent.putExtra("phone",docData.get(position).phone)
+                    intent.putExtra("email",docData.get(position).email)
+                    intent.putExtra("office",docData.get(position).office)
+                    intent.putExtra("address",docData.get(position).address)
+                    intent.putExtra("specialization",docData.get(position).specialization)
+                    startActivity(intent)
+                }
+            })
+        }.addOnFailureListener {
+            Toast.makeText(this.context,"failed", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun displayDermatologists(view: View) {
+
+        docData.clear()
+        database = FirebaseDatabase.getInstance().getReference("Doctors")
+        database.get().addOnSuccessListener {
+            for(i in it.children) {
+                val specialization = i.child("specialization").value.toString()
+
+                if (specialization.contentEquals("Dermatologist")) {
+
+                    val doctorId = i.key.toString()
+                    val firstName = i.child("firstName").value.toString()
+                    val lastName = i.child("lastName").value.toString()
+                    val age = i.child("age").value.toString()
+                    val gender = i.child("gender").value.toString()
+                    val email = i.child("email").value.toString()
+                    val phone = i.child("phone").value.toString()
+                    val address = i.child("address").value.toString()
+                    val idNo = i.child("idNo").value.toString()
+                    val role = i.child("role").value.toString()
+                    val office = i.child("office").value.toString()
+                    val specialization = i.child("specialization").value.toString()
+
+                    val doc = Doctor(
+                        doctorId,
+                        firstName,
+                        lastName,
+                        idNo,
+                        age,
+                        gender,
+                        phone,
+                        email,
+                        office,
+                        address,
+                        specialization,
+                        role
+                    )
+
+                    docData.add(doc)
+                }
+            }
+
+            if(docData.size == 0){
+                Toast.makeText(this.requireContext(),"No available appointments", Toast.LENGTH_LONG).show()
+            }
+
+
+            recyclerView = view.findViewById(R.id.recyclerView)
+
+            recyclerView.layoutManager  = LinearLayoutManager(this.context)
+            recyclerView.setHasFixedSize(true)
+
+            images.add(R.drawable.doctor)
+            val myAdapter = RecycleAdapter(docData,images)
+            recyclerView.adapter = myAdapter
+
+            myAdapter.setOnItemClickListener(object : RecycleAdapter.onItemClickListener{
+                override fun onItemClick(position: Int) {
+                    val intent = Intent(this@AdminDoctorsFragment.requireContext(), AdminDoctorDetailsActivity::class.java)
+                    intent.putExtra("doctorId",docData.get(position).doctorId)
+                    intent.putExtra("firstName",docData.get(position).firstName)
+                    intent.putExtra("lastName",docData.get(position).lastName)
+                    intent.putExtra("idNo",docData.get(position).idNo)
+                    intent.putExtra("age",docData.get(position).age)
+                    intent.putExtra("gender",docData.get(position).gender)
+                    intent.putExtra("phone",docData.get(position).phone)
+                    intent.putExtra("email",docData.get(position).email)
+                    intent.putExtra("office",docData.get(position).office)
+                    intent.putExtra("address",docData.get(position).address)
+                    intent.putExtra("specialization",docData.get(position).specialization)
+                    startActivity(intent)
+                }
+            })
+        }.addOnFailureListener {
+            Toast.makeText(this.context,"failed", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun displayDentists(view: View) {
+
+        docData.clear()
+        database = FirebaseDatabase.getInstance().getReference("Doctors")
+        database.get().addOnSuccessListener {
+            for(i in it.children) {
+                val specialization = i.child("specialization").value.toString()
+
+                if (specialization.contentEquals("Dentist")) {
+
+                    val doctorId = i.key.toString()
+                    val firstName = i.child("firstName").value.toString()
+                    val lastName = i.child("lastName").value.toString()
+                    val age = i.child("age").value.toString()
+                    val gender = i.child("gender").value.toString()
+                    val email = i.child("email").value.toString()
+                    val phone = i.child("phone").value.toString()
+                    val address = i.child("address").value.toString()
+                    val idNo = i.child("idNo").value.toString()
+                    val role = i.child("role").value.toString()
+                    val office = i.child("office").value.toString()
+                    val specialization = i.child("specialization").value.toString()
+
+                    val doc = Doctor(
+                        doctorId,
+                        firstName,
+                        lastName,
+                        idNo,
+                        age,
+                        gender,
+                        phone,
+                        email,
+                        office,
+                        address,
+                        specialization,
+                        role
+                    )
+
+                    docData.add(doc)
+                }
+            }
+
+            if(docData.size == 0){
+                Toast.makeText(this.requireContext(),"No available appointments", Toast.LENGTH_LONG).show()
+            }
+
+
+            recyclerView = view.findViewById(R.id.recyclerView)
+
+            recyclerView.layoutManager  = LinearLayoutManager(this.context)
+            recyclerView.setHasFixedSize(true)
+
+            images.add(R.drawable.doctor)
+            val myAdapter = RecycleAdapter(docData,images)
+            recyclerView.adapter = myAdapter
+
+            myAdapter.setOnItemClickListener(object : RecycleAdapter.onItemClickListener{
+                override fun onItemClick(position: Int) {
+                    val intent = Intent(this@AdminDoctorsFragment.requireContext(), AdminDoctorDetailsActivity::class.java)
+                    intent.putExtra("doctorId",docData.get(position).doctorId)
+                    intent.putExtra("firstName",docData.get(position).firstName)
+                    intent.putExtra("lastName",docData.get(position).lastName)
+                    intent.putExtra("idNo",docData.get(position).idNo)
+                    intent.putExtra("age",docData.get(position).age)
+                    intent.putExtra("gender",docData.get(position).gender)
+                    intent.putExtra("phone",docData.get(position).phone)
+                    intent.putExtra("email",docData.get(position).email)
+                    intent.putExtra("office",docData.get(position).office)
+                    intent.putExtra("address",docData.get(position).address)
+                    intent.putExtra("specialization",docData.get(position).specialization)
+                    startActivity(intent)
+                }
+            })
+        }.addOnFailureListener {
+            Toast.makeText(this.context,"failed", Toast.LENGTH_LONG).show()
+        }
+    }
+
     private fun displayAllDoctors(view: View){
 
         docData.clear()
@@ -107,6 +434,8 @@ class AdminDoctorsFragment : Fragment() {
                     startActivity(intent)
                 }
             })
+        }.addOnFailureListener {
+            Toast.makeText(this.context,"failed", Toast.LENGTH_LONG).show()
         }
     }
 }

@@ -42,7 +42,7 @@ class AdminDoctorDetailsActivity : AppCompatActivity() {
         val textViewOffice = findViewById<TextView>(R.id.textViewOffice)
         val textViewAddress = findViewById<TextView>(R.id.textViewAddress)
         val textViewSpecialization = findViewById<TextView>(R.id.textViewSpecialization)
-        val buttonDelete = findViewById<Button>(R.id.buttonDelete)
+        //val buttonDelete = findViewById<Button>(R.id.buttonDelete)
         val buttonEdit = findViewById<Button>(R.id.buttonEdit)
 
         textViewEmployeeId.text = doctorId
@@ -61,9 +61,9 @@ class AdminDoctorDetailsActivity : AppCompatActivity() {
             goToEditPage(doctorId,firstName,lastName,idNo,phone,email,office,address)
         }
 
-        buttonDelete.setOnClickListener {
+        /*buttonDelete.setOnClickListener {
             deleteDoctor(doctorId)
-        }
+        }*/
     }
 
     private fun goToEditPage(
@@ -89,7 +89,7 @@ class AdminDoctorDetailsActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun deleteDoctor(doctorId: String) {
+    /*private fun deleteDoctor(doctorId: String) {
 
         database = FirebaseDatabase.getInstance().getReference("Doctors").child(doctorId)
         database.removeValue().addOnSuccessListener {
@@ -97,5 +97,5 @@ class AdminDoctorDetailsActivity : AppCompatActivity() {
         }
         val intent = Intent(this, AdminActivity::class.java)
         startActivity(intent)
-    }
+    }*/
 }

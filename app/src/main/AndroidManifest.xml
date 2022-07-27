@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="za.ac.tut.hospitalmanagementsystem">
 
+    <uses-permission android:name="android.Manifest.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
