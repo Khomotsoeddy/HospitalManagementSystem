@@ -64,14 +64,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
+            <Button
+                android:id="@+id/buttonAddDoctor"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/textViewAddDoctor"
-                android:text="Add Doctor"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_add"
                 android:pointerIcon="hand"
-                android:textColor="#000000"
-                android:drawableStart="@drawable/ic_add"/>
+                android:text="Add Doctor"
+                android:textColor="#000000" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

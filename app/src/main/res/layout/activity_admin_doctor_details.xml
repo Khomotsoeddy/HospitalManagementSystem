@@ -259,7 +259,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_margin="20dp">
-            
+
             <Button
                 android:id="@+id/buttonEdit"
                 android:layout_width="match_parent"

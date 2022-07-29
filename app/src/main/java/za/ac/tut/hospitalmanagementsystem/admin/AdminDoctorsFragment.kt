@@ -30,7 +30,7 @@ class AdminDoctorsFragment : Fragment() {
         val view : View = inflater.inflate(R.layout.fragment_doctors_admin, container, false)
 
 
-        val addDoctor = view.findViewById<TextView>(R.id.textViewAddDoctor)
+        val addDoctor = view.findViewById<Button>(R.id.buttonAddDoctor)
 
         displayAllDoctors(view)
 

@@ -168,7 +168,7 @@ class AdminAppointmentsFragment : Fragment() {
                 }
             }
             if(appData.size == 0){
-                Toast.makeText(this.requireContext(),"No available appointments", Toast.LENGTH_LONG).show()
+                Toast.makeText(this.requireContext(),"No new appointments", Toast.LENGTH_LONG).show()
             }
 
             recyclerView = view.findViewById(R.id.recyclerViewView)
