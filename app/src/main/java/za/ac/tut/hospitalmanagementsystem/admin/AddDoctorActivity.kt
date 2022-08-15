@@ -13,23 +13,22 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import za.ac.tut.hospitalmanagementsystem.R
 import za.ac.tut.hospitalmanagementsystem.doctor.Doctors
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 import kotlin.random.Random
 
 class AddDoctorActivity : AppCompatActivity() {
 
     private val specialization = arrayOf("Dentist","Dermatologist","Gynaecologist","Optometrist")
     private val gender = arrayOf("Male","Female","Other")
-    private lateinit var gen : String
-    private lateinit var spec: String
+    //private lateinit var gen : String
+    //private lateinit var spec: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_doctor)
-
-        val buttonSubmit = findViewById<Button>(R.id.buttonSubmit)
-        buttonSubmit.setOnClickListener {
-            submitDoctorDetails()
-        }
+        var gen : String = ""
+        var spec: String = ""
 
         val actvSpec = findViewById<AutoCompleteTextView>(R.id.auto_complete_specification)
         val arrayAdapterSpec = ArrayAdapter(this, R.layout.drop_down, specialization)
@@ -47,11 +46,14 @@ class AddDoctorActivity : AppCompatActivity() {
             gen = adapterView.getItemAtPosition(i).toString()
             //Toast.makeText(this, "You Appointed $gen", Toast.LENGTH_SHORT).show()
         }
-
+        val buttonSubmit = findViewById<Button>(R.id.buttonSubmit)
+        buttonSubmit.setOnClickListener {
+            submitDoctorDetails(gen,spec)
+        }
 
     }
 
-    private fun submitDoctorDetails(){
+    private fun submitDoctorDetails(gen: String, spec: String) {
         var record = true
         val randomValues = Random.nextInt(100000000)
 
@@ -66,10 +68,27 @@ class AddDoctorActivity : AppCompatActivity() {
         val age = findViewById<TextInputEditText>(R.id.textInputEditTextAge).text.toString()
         val role = "doctor"
 
+        if(gen.isNullOrEmpty()){
+            record = false
+            Toast.makeText(this, "Please select a gender", Toast.LENGTH_SHORT).show()
+        }
+
+        if(spec.isNullOrEmpty()){
+            record = false
+            Toast.makeText(this, "Please select a specialization", Toast.LENGTH_SHORT).show()
+        }
         if(age.isEmpty()){
             record = false
             val nameContainer = findViewById<TextInputLayout>(R.id.AgeContainer)
             nameContainer.helperText = "enter age"
+        }
+
+        if(age.isNotEmpty()){
+            if(age.toInt()<0 && age.toInt()>170){
+                record = false
+                val nameContainer = findViewById<TextInputLayout>(R.id.AgeContainer)
+                nameContainer.helperText = "Invalid age"
+            }
         }
 
         if(firstName.isEmpty()){
@@ -136,11 +155,23 @@ class AddDoctorActivity : AppCompatActivity() {
             phoneContainer.helperText = "Invalid phone number"
         }
 
+        if(!phoneNotValid(phone)){
+            record = false
+            val phoneContainer = findViewById<TextInputLayout>(R.id.phoneContainer)
+            phoneContainer.helperText = "Invalid phone number"
+        }
+
 
         if(email.isEmpty()){
             record = false
             val usernameContainer = findViewById<TextInputLayout>(R.id.emailContainer)
             usernameContainer.helperText = "enter the username"
+        }
+
+        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            record = false
+            val usernameContainer = findViewById<TextInputLayout>(R.id.emailContainer)
+            usernameContainer.helperText = "Invalid email"
         }
 
         if(address.isEmpty()){
@@ -187,5 +218,12 @@ class AddDoctorActivity : AppCompatActivity() {
             val intent = Intent(this, AdminActivity::class.java)
         startActivity(intent)
         }
+    }
+
+    private fun phoneNotValid(toString: String): Boolean {
+        var p: Pattern = Pattern.compile("[0][6-8][0-9]{8}")
+        var m: Matcher = p.matcher(toString)
+
+        return m.matches()
     }
 }

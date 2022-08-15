@@ -13,11 +13,12 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import za.ac.tut.hospitalmanagementsystem.MainActivity
 import za.ac.tut.hospitalmanagementsystem.R
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class PatientRegisterActivity : AppCompatActivity() {
 
     private val gender = arrayOf("Male","Female","Other")
-    private lateinit var gen : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,18 +28,20 @@ class PatientRegisterActivity : AppCompatActivity() {
 
         val actv = findViewById<AutoCompleteTextView>(R.id.auto_complete_text)
         val arrayAdapter = ArrayAdapter(this, R.layout.drop_down,gender)
-
+        var gen : String = ""
         actv.setAdapter(arrayAdapter)
         actv.setOnItemClickListener { adapterView, _, i, _ ->
-            gen = adapterView.getItemAtPosition(i).toString()
-            //Toast.makeText(this, "You Appointed $gen", Toast.LENGTH_SHORT).show()
+            //if(!gen.isNullOrEmpty()) {
+                gen = adapterView.getItemAtPosition(i).toString()
+                //Toast.makeText(this, "You Appointed $gen", Toast.LENGTH_SHORT).show()
+            //}
         }
         buttonSubmit.setOnClickListener {
-            addToDatabase()
+            addToDatabase(gen)
         }
     }
 
-    private fun addToDatabase() {
+    private fun addToDatabase(gen: String) {
         var record = true
 
         val firstName = findViewById<TextInputEditText>(R.id.textInputEditTextFirstName)
@@ -55,6 +58,13 @@ class PatientRegisterActivity : AppCompatActivity() {
             record = false
             val nameContainer = findViewById<TextInputLayout>(R.id.AgeContainer)
             nameContainer.helperText = "enter age"
+        }else{
+            val toAge = age.text.toString()
+            if(toAge.toInt() <0 && toAge.toInt()>170){
+                record = false
+                val nameContainer = findViewById<TextInputLayout>(R.id.AgeContainer)
+                nameContainer.helperText = "Invalid age"
+            }
         }
 
         if(firstName.text.toString().isEmpty()){
@@ -79,7 +89,7 @@ class PatientRegisterActivity : AppCompatActivity() {
             if(counter>0){
                 record = false
                 val nameContainer = findViewById<TextInputLayout>(R.id.nameContainer)
-                nameContainer.helperText = "Surname can't contain number or special character"
+                nameContainer.helperText = "First name can't contain number or special character"
             }
         }
 
@@ -115,11 +125,23 @@ class PatientRegisterActivity : AppCompatActivity() {
             phoneContainer.helperText = "Invalid phone number"
         }
 
+        if(!phoneNotValid(phone.text.toString())){
+            record = false
+            val phoneContainer = findViewById<TextInputLayout>(R.id.phoneContainer)
+            phoneContainer.helperText = "Invalid phone number"
+        }
+
         if(email.text.toString().isEmpty()){
             record = false
             val usernameContainer = findViewById<TextInputLayout>(R.id.emailContainer)
-            usernameContainer.helperText = "enter the username"
+            usernameContainer.helperText = "enter email"
         }
+        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()){
+            record = false
+            val usernameContainer = findViewById<TextInputLayout>(R.id.emailContainer)
+            usernameContainer.helperText = "Invalid email"
+        }
+
 
         if(address.text.toString().isEmpty()){
             record = false
@@ -142,6 +164,10 @@ class PatientRegisterActivity : AppCompatActivity() {
             val passwordContainer = findViewById<TextInputLayout>(R.id.passwordContainer)
             passwordContainer.helperText = "Invalid password length"
         }
+        if(gen.isNullOrEmpty()) {
+            record = false
+            Toast.makeText(this, "Please select a gender", Toast.LENGTH_SHORT).show()
+        }
 
         if(record){
             val database  = Firebase.database
@@ -152,7 +178,7 @@ class PatientRegisterActivity : AppCompatActivity() {
                 firstName.text.toString(),
                 lastName.text.toString(),
                 age.text.toString(),
-                gen ,
+                    gen,
                 email.text.toString(),
                 phone.text.toString() ,
                 address.text.toString(),
@@ -164,8 +190,17 @@ class PatientRegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun phoneNotValid(toString: String): Boolean {
+        var p:Pattern = Pattern.compile("[0][6-8][0-9]{8}")
+        var m:Matcher = p.matcher(toString)
+
+        return m.matches()
+    }
+
     private fun goToLoginPage() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
+
+
 }

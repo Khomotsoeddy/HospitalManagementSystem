@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_phone"
                 android:hint="Phone Number"
-                android:inputType="number"
+                android:inputType="phone"
                 android:minHeight="48dp"
                 android:drawablePadding="10dp"
                 android:textColor="#000"

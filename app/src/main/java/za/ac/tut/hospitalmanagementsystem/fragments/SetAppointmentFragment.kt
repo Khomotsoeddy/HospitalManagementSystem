@@ -25,18 +25,20 @@ import kotlin.random.Random
 class SetAppointmentFragment : Fragment() {
     private lateinit var database : DatabaseReference
     private val specialization = arrayOf("Dentist","Dermatologist","Gynaecologist","Optometrist")
-    private lateinit var spec: String
-    private lateinit var pickedDate : String
+    //private lateinit var spec: String
+    //private lateinit var pickedDate : String
     private lateinit var textViewEmail : TextView
     private lateinit var textViewPhone : TextView
-    private lateinit var date: TextInputEditText
+    //private lateinit
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_setappointment, container, false)
 
+        var date = view.findViewById<TextInputEditText>(R.id.textInputEditTextDate)
         val data = arguments
         val patientId = data?.get("patientId").toString()
+        var spec: String = ""
 
         println(patientId)
 
@@ -57,8 +59,7 @@ class SetAppointmentFragment : Fragment() {
             myCalender.set(Calendar.YEAR,year)
             myCalender.set(Calendar.MONTH,month)
             myCalender.set(Calendar.DAY_OF_MONTH,dayOfMonth)
-            updateMyCalender(myCalender,view)
-
+            updateMyCalender(myCalender,view,date)
         }
 
         //button
@@ -67,9 +68,10 @@ class SetAppointmentFragment : Fragment() {
                 Calendar.DAY_OF_MONTH)).show()
 
         }
+
         val buttonSubmit = view.findViewById<Button>(R.id.buttonSubmit)
         buttonSubmit.setOnClickListener {
-            submitAppointment(view,patientId)
+            submitAppointment(view,patientId,date,spec)
         }
 
         adminDetails()
@@ -91,17 +93,22 @@ class SetAppointmentFragment : Fragment() {
         }
     }
 
-    private fun updateMyCalender(myCalender: Calendar,view: View) {
-        date = view.findViewById(R.id.textInputEditTextDate)
+    private fun updateMyCalender(myCalender: Calendar, view: View, date: TextInputEditText) {
+        //date =
         val dFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
 
         date.setText(dFormat.format(myCalender.time))
-        pickedDate = dFormat.format(myCalender.time).toString()
+        //pickedDate = dFormat.format(myCalender.time).toString()
     }
 
-    private fun submitAppointment(view: View, patientId: String) {
+    private fun submitAppointment(
+        view: View,
+        patientId: String,
+        date: TextInputEditText,
+        spec: String
+    ) {
         var record = true
-
+        val pickedDate = date.text.toString()
         val descriptionRecord: String
         val nowDate = Date()
         val tomorrow = LocalDate.now().plusDays(30)
@@ -112,39 +119,50 @@ class SetAppointmentFragment : Fragment() {
         val tomorrowDate = tomorrow.format(formatter)
 
 
-        val current: LocalDate = LocalDate.parse(currentDate, formatter)
-        val maxRange: LocalDate = LocalDate.parse(tomorrowDate, formatter)
-        val chosenDate: LocalDate = LocalDate.parse(pickedDate, formatter)
+        if(!pickedDate.isNullOrEmpty()) {
 
-        if(date.text.toString().isEmpty()){
-            record = false
-            val dateContainer = view.findViewById<TextInputLayout>(R.id.dateContainer)
-            dateContainer.helperText = "Pick date"
+            val current: LocalDate = LocalDate.parse(currentDate, formatter)
+            val maxRange: LocalDate = LocalDate.parse(tomorrowDate, formatter)
+            val chosenDate: LocalDate = LocalDate.parse(pickedDate, formatter)
+
+
+            if (date.text.toString().isEmpty()) {
+                record = false
+                val dateContainer = view.findViewById<TextInputLayout>(R.id.dateContainer)
+                dateContainer.helperText = "Pick date"
+            } else {
+
+                if (current.isAfter(chosenDate)) {
+                    record = false
+                    val dateContainer = view.findViewById<TextInputLayout>(R.id.dateContainer)
+                    dateContainer.helperText = "Invalid date"
+                }
+
+                if (current.isEqual(chosenDate)) {
+                    record = false
+                    val dateContainer = view.findViewById<TextInputLayout>(R.id.dateContainer)
+                    dateContainer.helperText = "Invalid date"
+                }
+
+                if (maxRange.isBefore(chosenDate)) {
+                    record = false
+                    val dateContainer = view.findViewById<TextInputLayout>(R.id.dateContainer)
+                    dateContainer.helperText = "Date is out of range(30 days +)"
+                }
+            }
         }else{
-
-            if(current.isAfter(chosenDate)){
-                record = false
-                val dateContainer = view.findViewById<TextInputLayout>(R.id.dateContainer)
-                dateContainer.helperText = "Invalid date"
-            }
-
-            if(current.isEqual(chosenDate)){
-                record = false
-                val dateContainer = view.findViewById<TextInputLayout>(R.id.dateContainer)
-                dateContainer.helperText = "Invalid date"
-            }
-
-            if(maxRange.isBefore(chosenDate)){
-                record = false
-                val dateContainer = view.findViewById<TextInputLayout>(R.id.dateContainer)
-                dateContainer.helperText = "Date is out of range(30 days +)"
-            }
+            record = false
+            Toast.makeText(this.context,"Please pick a date", Toast.LENGTH_LONG).show()
         }
 
+        if(spec.isNullOrEmpty()){
+            record = false
+            Toast.makeText(this.context,"Please choose specialization", Toast.LENGTH_LONG).show()
+        }
         val description = requireView().findViewById<TextInputEditText>(R.id.textInputEditTextDescription)
 
         if(description.text.toString().isEmpty()){
-            record = false
+            //record = false
             descriptionRecord = "No description"
         }else{
             descriptionRecord = description.text.toString()
@@ -167,7 +185,7 @@ class SetAppointmentFragment : Fragment() {
                 "Pending"
             ))
 
-            Toast.makeText(this.context,"Details sent", Toast.LENGTH_LONG).show()
+            Toast.makeText(this.context,"Details sent", Toast.LENGTH_SHORT).show()
             date.text?.clear()
             description.text?.clear()
         }
