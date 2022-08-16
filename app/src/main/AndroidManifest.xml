@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="za.ac.tut.hospitalmanagementsystem">
 
-    <uses-permission android:name="android.Manifest.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.Manifest.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HospitalManagementSystem"
         tools:targetApi="31">
+        <activity
+            android:name=".BiometricActivity"
+            android:exported="false" />
         <activity
             android:name=".patient.CancelAppointmentActivity"
             android:exported="false" />
