@@ -1,5 +1,6 @@
 package za.ac.tut.hospitalmanagementsystem.doctor
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,8 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import za.ac.tut.hospitalmanagementsystem.AdminAppointmentRecycleAdapter
 import za.ac.tut.hospitalmanagementsystem.DoctorAppointmentAdapter
 import za.ac.tut.hospitalmanagementsystem.R
+import za.ac.tut.hospitalmanagementsystem.admin.AdminAppointmentEditActivity
 import za.ac.tut.hospitalmanagementsystem.appointment.Appointment
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -112,7 +115,14 @@ class DoctorAppointmentFragment : Fragment() {
             recyclerView.layoutManager  = LinearLayoutManager(this.context)
             recyclerView.setHasFixedSize(true)
 
-            recyclerView.adapter = DoctorAppointmentAdapter(appData)
+            val myAdapter = DoctorAppointmentAdapter(appData)
+            recyclerView.adapter = myAdapter
+
+            myAdapter.setOnItemClickListener(object : DoctorAppointmentAdapter.onItemClickListener{
+                override fun onItemClick(position: Int) {
+                }
+
+            })
 
         }.addOnFailureListener {
             Toast.makeText(this.requireContext(),"failed", Toast.LENGTH_LONG).show()
@@ -173,7 +183,23 @@ class DoctorAppointmentFragment : Fragment() {
             recyclerView.layoutManager  = LinearLayoutManager(this.context)
             recyclerView.setHasFixedSize(true)
 
-            recyclerView.adapter = DoctorAppointmentAdapter(appData)
+            val myAdapter = DoctorAppointmentAdapter(appData)
+            recyclerView.adapter = myAdapter
+
+            myAdapter.setOnItemClickListener(object : DoctorAppointmentAdapter.onItemClickListener{
+                override fun onItemClick(position: Int) {
+                    //Toast.makeText(this@DoctorAppointmentFragment.requireContext(),"hi",Toast.LENGTH_LONG).show()
+
+                    val intent = Intent(this@DoctorAppointmentFragment.requireContext(), PostponeAppointmentActivity::class.java)
+                    intent.putExtra("appointmentId", appData[position].appointmentId)
+                    intent.putExtra("description", appData[position].description)
+                    intent.putExtra("date", appData[position].date)
+                    intent.putExtra("specialization", appData[position].specialization)
+                    intent.putExtra("doctorId", doctorId)
+                    startActivity(intent)
+                }
+
+            })
 
         }.addOnFailureListener {
             Toast.makeText(this.requireContext(),"failed", Toast.LENGTH_LONG).show()
@@ -220,7 +246,15 @@ class DoctorAppointmentFragment : Fragment() {
             recyclerView.layoutManager  = LinearLayoutManager(this.context)
             recyclerView.setHasFixedSize(true)
 
-            recyclerView.adapter = DoctorAppointmentAdapter(appData)
+            val myAdapter = DoctorAppointmentAdapter(appData)
+            recyclerView.adapter = myAdapter
+
+            myAdapter.setOnItemClickListener(object : DoctorAppointmentAdapter.onItemClickListener{
+                override fun onItemClick(position: Int) {
+
+                }
+
+            })
 
         }.addOnFailureListener {
             Toast.makeText(this.requireContext(),"failed", Toast.LENGTH_LONG).show()

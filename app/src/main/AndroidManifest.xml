@@ -16,6 +16,9 @@
         android:theme="@style/Theme.HospitalManagementSystem"
         tools:targetApi="31">
         <activity
+            android:name=".doctor.PostponeAppointmentActivity"
+            android:exported="false" />
+        <activity
             android:name=".BiometricActivity"
             android:exported="false" />
         <activity

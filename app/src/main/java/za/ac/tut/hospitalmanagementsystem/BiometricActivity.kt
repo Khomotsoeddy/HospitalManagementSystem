@@ -8,8 +8,6 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import za.ac.tut.hospitalmanagementsystem.admin.AdminActivity
-import za.ac.tut.hospitalmanagementsystem.doctor.DoctorActivity
-import za.ac.tut.hospitalmanagementsystem.patient.PatientActivity
 import java.util.concurrent.Executor
 
 class BiometricActivity : AppCompatActivity() {
@@ -45,13 +43,13 @@ class BiometricActivity : AppCompatActivity() {
                     startActivity(intent)
                     Toast.makeText(this@BiometricActivity, "Successful", Toast.LENGTH_SHORT).show()
                 } else if (radioPatient.isChecked) {
-                    val intent = Intent(this@BiometricActivity, PatientActivity::class.java)
-                    startActivity(intent)
-                    Toast.makeText(this@BiometricActivity, "Successful", Toast.LENGTH_SHORT).show()
+                    //val intent = Intent(this@BiometricActivity, PatientActivity::class.java)
+                    //startActivity(intent)
+                    Toast.makeText(this@BiometricActivity, "Only admin is authenticated", Toast.LENGTH_SHORT).show()
                 } else if (radioDoctor.isChecked) {
-                    val intent = Intent(this@BiometricActivity, DoctorActivity::class.java)
-                    startActivity(intent)
-                    Toast.makeText(this@BiometricActivity, "Successful", Toast.LENGTH_SHORT).show()
+                    //val intent = Intent(this@BiometricActivity, DoctorActivity::class.java)
+                    //startActivity(intent)
+                    Toast.makeText(this@BiometricActivity, "Only admin is authenticated", Toast.LENGTH_SHORT).show()
                 }else {
                     Toast.makeText(
                         this@BiometricActivity,
