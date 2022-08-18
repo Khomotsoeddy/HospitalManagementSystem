@@ -45,11 +45,11 @@ class BiometricActivity : AppCompatActivity() {
                 } else if (radioPatient.isChecked) {
                     //val intent = Intent(this@BiometricActivity, PatientActivity::class.java)
                     //startActivity(intent)
-                    Toast.makeText(this@BiometricActivity, "Only admin is authenticated", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@BiometricActivity, "Not authorized", Toast.LENGTH_SHORT).show()
                 } else if (radioDoctor.isChecked) {
                     //val intent = Intent(this@BiometricActivity, DoctorActivity::class.java)
                     //startActivity(intent)
-                    Toast.makeText(this@BiometricActivity, "Only admin is authenticated", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@BiometricActivity, "Not authorized", Toast.LENGTH_SHORT).show()
                 }else {
                     Toast.makeText(
                         this@BiometricActivity,
